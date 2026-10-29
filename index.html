@@ -4,110 +4,602 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Raíces en Movimiento · Transformación social</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --hero-img: url("img/portada.png");
-  color-scheme:dark;
-  --bg:#0b0b0b; --ink:#f4f1f0; --teal:#d71920; --sun:#ff4d4d; --mist:#2b2b2b; --white:#161616; --redtxt:#ff6b6b;
-  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif;
+:root {
+  color-scheme: dark;
+  --bg: #0b0b0b;
+  --ink: #f4f1f0;
+  --teal: #d71920;
+  --sun: #ff4d4d;
+  --mist: #2b2b2b;
+  --white: #161616;
+  --redtxt: #ff6b6b;
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --body: "Source Sans 3", system-ui, sans-serif;
 }
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{font:18px/1.6 var(--body);background:var(--bg);color:var(--ink)}
-h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.02em}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
-section{padding:88px 6vw}
-.wrap{max-width:1100px;margin:auto}
-h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:12px}
-.lead{max-width:60ch;opacity:.8;margin-bottom:40px}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  font: 18px/1.6 var(--body);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 3px;
+}
+
+section {
+  padding: 88px 6vw;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  margin-bottom: 12px;
+}
+
+.lead {
+  max-width: 60ch;
+  opacity: .8;
+  margin-bottom: 40px;
+}
 
 /* BARRA Y MENÚ */
-header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 6vw;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
-.logo{font:800 1.15rem var(--display);text-decoration:none}
-#menuBtn{font:600 1rem var(--body);background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 20px;cursor:pointer}
-#menu{position:fixed;top:64px;right:4vw;width:min(380px,92vw);max-height:calc(100vh - 84px);overflow:auto;background:var(--white);border:1px solid var(--mist);border-radius:18px;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.18);transform-origin:top right;transform:scale(.94);opacity:0;pointer-events:none;transition:.22s;z-index:19}
-#menu.open{transform:none;opacity:1;pointer-events:auto}
-#menu nav a{display:block;padding:10px 0;font:700 1.25rem var(--display);text-decoration:none;border-bottom:1px solid var(--mist)}
-#menu nav a:hover{color:var(--redtxt)}
-#menu h4{font:600 .95rem var(--body);margin:20px 0 10px;opacity:.7}
-.mini{list-style:none;padding:0 0 0 18px;border-left:3px solid var(--mist)}
-.mini li{position:relative;margin-bottom:12px}
-.mini li::before{content:"";position:absolute;left:-25px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--sun)}
-.mini a{text-decoration:none;font-size:.95rem;display:block;line-height:1.3}
-.mini b{font-family:var(--display)}
-.mini a:hover b{color:var(--redtxt)}
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 6vw;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font: 800 1.15rem var(--display);
+  text-decoration: none;
+}
+
+#menuBtn {
+  font: 600 1rem var(--body);
+  background: var(--ink);
+  color: var(--bg);
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#menu {
+  position: fixed;
+  top: 64px;
+  right: 4vw;
+  width: min(380px, 92vw);
+  max-height: calc(100vh - 84px);
+  overflow: auto;
+  background: var(--white);
+  border: 1px solid var(--mist);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
+  transform-origin: top right;
+  transform: scale(.94);
+  opacity: 0;
+  pointer-events: none;
+  transition: .22s;
+  z-index: 19;
+}
+
+#menu.open {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#menu nav a {
+  display: block;
+  padding: 10px 0;
+  font: 700 1.25rem var(--display);
+  text-decoration: none;
+  border-bottom: 1px solid var(--mist);
+}
+
+#menu nav a:hover {
+  color: var(--redtxt);
+}
+
+#menu h4 {
+  font: 600 .95rem var(--body);
+  margin: 20px 0 10px;
+  opacity: .7;
+}
+
+.mini {
+  list-style: none;
+  padding: 0 0 0 18px;
+  border-left: 3px solid var(--mist);
+}
+
+.mini li {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.mini li::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sun);
+}
+
+.mini a {
+  text-decoration: none;
+  font-size: .95rem;
+  display: block;
+  line-height: 1.3;
+}
+
+.mini b {
+  font-family: var(--display);
+}
+
+.mini a:hover b {
+  color: var(--redtxt);
+}
 
 /* PORTADA */
-#inicio{min-height:100vh;display:flex;align-items:flex-end;padding-bottom:9vh;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.45) 55%,rgba(0,0,0,.9)),var(--hero-img) center/cover no-repeat,#000}
-#inicio h1{font-size:clamp(2.8rem,9vw,7rem);max-width:12ch}
-#inicio p{max-width:46ch;font-size:1.25rem;margin:22px 0 30px}
-.btn{display:inline-block;background:var(--teal);color:#fff;font:700 1rem var(--display);padding:14px 26px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
-.btn.ghost{background:transparent;color:#fff;border:2px solid #fff;margin-left:10px}
+#inicio {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 9vh;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.45) 55%, rgba(0,0,0,.9)),
+    #000;
+}
+
+#inicio h1 {
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  max-width: 12ch;
+}
+
+#inicio p {
+  max-width: 46ch;
+  font-size: 1.25rem;
+  margin: 22px 0 30px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--teal);
+  color: #fff;
+  font: 700 1rem var(--display);
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  margin-left: 10px;
+}
+
+/* SIETE FONDOS EN CASCADA */
+.fondo-cascada {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 9vh 6vw;
+  color: #fff;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #111;
+}
+
+.fondo-cascada::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.08),
+    rgba(0,0,0,.2) 45%,
+    rgba(0,0,0,.8)
+  );
+  pointer-events: none;
+}
+
+.fondo-cascada .wrap {
+  position: relative;
+  z-index: 1;
+}
 
 /* LÍNEA DE TIEMPO */
-.tl{position:relative;margin-left:8px;border-left:4px solid var(--teal);padding-left:34px}
-.tl details{position:relative;margin-bottom:18px;background:var(--white);border:1px solid var(--mist);border-radius:14px}
-.tl details::before{content:"";position:absolute;left:-47px;top:24px;width:18px;height:18px;border-radius:50%;background:var(--teal);border:4px solid var(--bg)}
-.tl summary{cursor:pointer;list-style:none;padding:18px 22px;display:flex;gap:18px;align-items:baseline}
-.tl summary::-webkit-details-marker{display:none}
-.tl .yr{font:800 1.25rem var(--display);color:var(--redtxt);min-width:11.5ch;flex-shrink:0}
-.tl summary span:last-child{font:700 1.15rem var(--display)}
-.tl details[open] summary{border-bottom:1px solid var(--mist)}
-.tl .txt{padding:16px 22px 20px;max-width:62ch}
+.tl {
+  position: relative;
+  margin-left: 8px;
+  border-left: 4px solid var(--teal);
+  padding-left: 34px;
+}
+
+.tl details {
+  position: relative;
+  margin-bottom: 18px;
+  background: var(--white);
+  border: 1px solid var(--mist);
+  border-radius: 14px;
+}
+
+.tl details::before {
+  content: "";
+  position: absolute;
+  left: -47px;
+  top: 24px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 4px solid var(--bg);
+}
+
+.tl summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 22px;
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+}
+
+.tl summary::-webkit-details-marker {
+  display: none;
+}
+
+.tl .yr {
+  font: 800 1.25rem var(--display);
+  color: var(--redtxt);
+  min-width: 11.5ch;
+  flex-shrink: 0;
+}
+
+.tl summary span:last-child {
+  font: 700 1.15rem var(--display);
+}
+
+.tl details[open] summary {
+  border-bottom: 1px solid var(--mist);
+}
+
+.tl .txt {
+  padding: 16px 22px 20px;
+  max-width: 62ch;
+}
 
 /* PROYECTOS */
-#proyectos{background:#8f0f16}
-#proyectos .filters button{border-color:#fff;color:#fff}
-#proyectos .filters button.on{background:#fff;color:#8f0f16}
-#proyectos .lead{opacity:.95}
-#proyectos .bar{background:#3a3a3a}
-#proyectos .bar i{background:#ff4d4d}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.filters button{font:600 .95rem var(--body);padding:8px 18px;border-radius:999px;border:2px solid var(--teal);background:transparent;color:var(--ink);cursor:pointer}
-.filters button.on{background:var(--teal);color:#fff}
-.filters button:hover{border-color:var(--sun)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
-.card{background:var(--white);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.card .top{height:140px;display:flex;align-items:flex-end;padding:14px 18px;color:#fff;font:800 2.3rem var(--display)}
-.card .body{padding:18px 20px 22px}
-.card h3{font-size:1.3rem;margin-bottom:8px}
-.card .tag{font-weight:600;font-size:.9rem;color:var(--redtxt)}
-.card p{font-size:.98rem;margin:8px 0 14px}
-.bar{height:8px;background:var(--mist);border-radius:8px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--sun)}
-.card small{display:block;margin-top:6px;opacity:.75}
+#proyectos {
+  background: #8f0f16;
+}
+
+#proyectos .filters button {
+  border-color: #fff;
+  color: #fff;
+}
+
+#proyectos .filters button.on {
+  background: #fff;
+  color: #8f0f16;
+}
+
+#proyectos .lead {
+  opacity: .95;
+}
+
+#proyectos .bar {
+  background: #3a3a3a;
+}
+
+#proyectos .bar i {
+  background: #ff4d4d;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.filters button {
+  font: 600 .95rem var(--body);
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--teal);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.filters button.on {
+  background: var(--teal);
+  color: #fff;
+}
+
+.filters button:hover {
+  border-color: var(--sun);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .top {
+  height: 140px;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px 18px;
+  color: #fff;
+  font: 800 2.3rem var(--display);
+}
+
+.card .body {
+  padding: 18px 20px 22px;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.card .tag {
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--redtxt);
+}
+
+.card p {
+  font-size: .98rem;
+  margin: 8px 0 14px;
+}
+
+.bar {
+  height: 8px;
+  background: var(--mist);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--sun);
+}
+
+.card small {
+  display: block;
+  margin-top: 6px;
+  opacity: .75;
+}
 
 /* GALERÍA */
-.gal{columns:3 240px;column-gap:16px}
-.gal figure{break-inside:avoid;margin-bottom:16px;position:relative;cursor:zoom-in;border-radius:12px;overflow:hidden;background:var(--mist)}
-.gal img,.gal video,.gal .ph{display:block;width:100%}
-.gal .ph{display:flex;align-items:center;justify-content:center;color:#fff;font:700 1rem var(--display);text-align:center;padding:12px}
-.gal figcaption{position:absolute;inset:auto 0 0 0;padding:26px 14px 10px;color:#fff;font-size:.9rem;background:linear-gradient(transparent,rgba(0,0,0,.7))}
-.gal .vid::after{content:"▶";position:absolute;top:12px;right:12px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;width:34px;height:34px;display:grid;place-items:center;font-size:.8rem}
-#lb{position:fixed;inset:0;background:rgba(5,15,15,.93);z-index:50;display:none;align-items:center;justify-content:center;flex-direction:column;padding:4vw;color:#fff}
-#lb.open{display:flex}
-#lb .stage{max-width:92vw;max-height:78vh}
-#lb img,#lb video{max-width:92vw;max-height:78vh;border-radius:10px}
-#lb .yt{width:min(92vw,980px);aspect-ratio:16/9;border:0;border-radius:10px;background:#000}
-#lb .ph{width:min(70vw,760px);height:50vh;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 1.6rem var(--display)}
-#lb button{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;width:48px;height:48px;border-radius:50%;font-size:1.4rem;cursor:pointer}
-#lbX{top:20px;right:20px}#lbP{left:20px;top:50%}#lbN{right:20px;top:50%}
-#lbCap{margin-top:16px}
+.gal {
+  columns: 3 240px;
+  column-gap: 16px;
+}
+
+.gal figure {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  position: relative;
+  cursor: zoom-in;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--mist);
+}
+
+.gal img, .gal video, .gal .ph {
+  display: block;
+  width: 100%;
+}
+
+.gal .ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font: 700 1rem var(--display);
+  text-align: center;
+  padding: 12px;
+}
+
+.gal figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 26px 14px 10px;
+  color: #fff;
+  font-size: .9rem;
+  background: linear-gradient(transparent, rgba(0,0,0,.7));
+}
+
+.gal .vid::after {
+  content: "▶";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  font-size: .8rem;
+}
+
+#lb {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,15,15,.93);
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 4vw;
+  color: #fff;
+}
+
+#lb.open {
+  display: flex;
+}
+
+#lb .stage {
+  max-width: 92vw;
+  max-height: 78vh;
+}
+
+#lb img, #lb video {
+  max-width: 92vw;
+  max-height: 78vh;
+  border-radius: 10px;
+}
+
+#lb .yt {
+  width: min(92vw, 980px);
+  aspect-ratio: 16/9;
+  border: 0;
+  border-radius: 10px;
+  background: #000;
+}
+
+#lb .ph {
+  width: min(70vw, 760px);
+  height: 50vh;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 1.6rem var(--display);
+}
+
+#lb button {
+  position: absolute;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  border: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+#lbX { top: 20px; right: 20px; }
+#lbP { left: 20px; top: 50%; }
+#lbN { right: 20px; top: 50%; }
+#lbCap { margin-top: 16px; }
 
 /* BIBLIOGRAFÍA */
-#bibliografia{background:var(--white)}
-.biblio{max-width:70ch}
-.biblio h3{font-size:1.5rem;margin:40px 0 12px;color:var(--redtxt)}
-.biblio p{margin-bottom:1.1em;line-height:1.75}
-.biblio .vacio{border:2px dashed var(--mist);border-radius:14px;padding:28px;opacity:.8}
-footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-top:6px solid var(--teal)}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-@media(max-width:600px){.tl{padding-left:24px}.tl details::before{left:-37px}.tl summary{flex-direction:column;gap:2px}}
+#bibliografia {
+  background: var(--white);
+}
+
+.biblio {
+  max-width: 70ch;
+}
+
+.biblio h3 {
+  font-size: 1.5rem;
+  margin: 40px 0 12px;
+  color: var(--redtxt);
+}
+
+.biblio p {
+  margin-bottom: 1.1em;
+  line-height: 1.75;
+}
+
+.biblio .vacio {
+  border: 2px dashed var(--mist);
+  border-radius: 14px;
+  padding: 28px;
+  opacity: .8;
+}
+
+footer {
+  padding: 44px 6vw;
+  background: #000;
+  color: #f4f1f0;
+  text-align: center;
+  border-top: 6px solid var(--teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .tl { padding-left: 24px; }
+  .tl details::before { left: -37px; }
+  .tl summary { flex-direction: column; gap: 2px; }
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -127,14 +619,26 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   <ul class="mini" id="miniTl"></ul>
 </div>
 
+<!-- PORTADA -->
 <section id="inicio">
   <div class="wrap">
-    <h1>Insurrecion Y Revolucion Popular Sandinista</h1>
-    <p>Trabajamos con vecinos, jóvenes y organizaciones para convertir problemas locales en proyectos que duran.</p>
-    <a class="btn" href="#proyectos">Ver proyectos</a><a class="btn ghost" href="#historia">Ver línea de tiempo</a>
+    <h1>Insurrección y Revolución Popular Sandinista</h1>
+    <p>Una recorrido visual por la historia, las transformaciones sociales y la memoria colectiva de Nicaragua.</p>
+    <a class="btn" href="#proyectos">Ver proyectos</a>
+    <a class="btn ghost" href="#historia">Ver línea de tiempo</a>
   </div>
 </section>
 
+<!-- FONDOS CONSECUTIVOS -->
+<section class="fondo-cascada" data-fondo="001"><div class="wrap"><h2>Memoria de la Revolución</h2></div></section>
+<section class="fondo-cascada" data-fondo="002"><div class="wrap"><h2>La lucha por la transformación</h2></div></section>
+<section class="fondo-cascada" data-fondo="003"><div class="wrap"><h2>El triunfo de 1979</h2></div></section>
+<section class="fondo-cascada" data-fondo="004"><div class="wrap"><h2>Legado y memoria colectiva</h2></div></section>
+<section class="fondo-cascada" data-fondo="005"><div class="wrap"><h2></h2></div></section>
+<section class="fondo-cascada" data-fondo="006"><div class="wrap"><h2></h2></div></section>
+<section class="fondo-cascada" data-fondo="007"><div class="wrap"><h2></h2></div></section>
+
+<!-- LÍNEA DE TIEMPO -->
 <section id="historia">
   <div class="wrap">
     <h2>Línea de tiempo</h2>
@@ -143,6 +647,7 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
+<!-- PROYECTOS -->
 <section id="proyectos">
   <div class="wrap">
     <h2>Proyectos de transformación social</h2>
@@ -152,6 +657,7 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
+<!-- GALERÍA -->
 <section id="galeria">
   <div class="wrap">
     <h2>Galería multimedia</h2>
@@ -161,6 +667,7 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
+<!-- BIBLIOGRAFÍA -->
 <section id="bibliografia">
   <div class="wrap">
     <h2>Bibliografía</h2>
@@ -184,6 +691,51 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
 </div>
 
 <script>
+/* CARGA LOS FONDOS 001–007 */
+const extensionesFondo = ["jpg", "jpeg", "png", "webp", "avif"];
+
+document.querySelectorAll(".fondo-cascada").forEach(seccion => {
+  const numero = seccion.dataset.fondo;
+
+  const intentarCargar = indice => {
+    if (indice >= extensionesFondo.length) {
+      console.warn(`No se encontró Fondos/${numero} con extensión compatible.`);
+      return;
+    }
+
+    const ruta = `Fondos/${numero}.${extensionesFondo[indice]}`;
+    const imagen = new Image();
+
+    imagen.onload = () => {
+      seccion.style.backgroundImage = `url("${ruta}")`;
+    };
+
+    imagen.onerror = () => intentarCargar(indice + 1);
+    imagen.src = ruta;
+  };
+
+  intentarCargar(0);
+});
+
+/* MENÚ */
+const menu = document.getElementById("menu");
+const mb = document.getElementById("menuBtn");
+
+const setMenu = abierto => {
+  menu.classList.toggle("open", abierto);
+  mb.setAttribute("aria-expanded", abierto);
+  mb.textContent = abierto ? "Cerrar" : "Menú";
+};
+
+mb.onclick = () => setMenu(!menu.classList.contains("open"));
+menu.addEventListener("click", evento => {
+  if (evento.target.closest("a")) setMenu(false);
+});
+
+/* LÍNEA DE TIEMPO */
+const tl = document.getElementById("tl");
+const mini = document.getElementById("miniTl");
+
 const TIMELINE = [
   {y:"21 de febrero de 1934", k:"1934", t:"Asesinato de Augusto C. Sandino", d:"La Guardia Nacional persigue luego a integrantes de su movimiento y a comunidades rurales."},
   {y:"1936–1937", k:"1936", t:"Somoza García consolida su poder", d:"Anastasio Somoza García asume la presidencia en 1937 y establece las bases de la dictadura."},
@@ -202,6 +754,36 @@ const TIMELINE = [
   {y:"1990", k:"1990", t:"Elecciones de 1990", d:"La Unión Nacional Opositora gana las elecciones y el FSLN deja el gobierno."}
 ];
 
+TIMELINE.forEach((evento, indice) => {
+  tl.insertAdjacentHTML(
+    "beforeend",
+    `<details id="h${indice}">
+      <summary>
+        <span class="yr">${evento.y}</span>
+        <span>${evento.t}</span>
+      </summary>
+      <div class="txt">${evento.d}</div>
+    </details>`
+  );
+
+  mini.insertAdjacentHTML(
+    "beforeend",
+    `<li><a href="#h${indice}" data-i="${indice}">
+      <b>${evento.k}</b> · ${evento.t}
+    </a></li>`
+  );
+});
+
+mini.addEventListener("click", evento => {
+  const enlace = evento.target.closest("a");
+  if (enlace) {
+    setTimeout(() => {
+      document.getElementById("h" + enlace.dataset.i).open = true;
+    }, 50);
+  }
+});
+
+/* PROYECTOS */
 const PROJECTS = [
   {n:"Huertos Vivos", c:"Alimentación", g:["#8f0f16","#d71920"], d:"Huertos familiares y mercado local para asegurar comida sana todo el año.", p:75, s:"150 familias"},
   {n:"Escuela de Barrio", c:"Educación", g:["#111","#5a0a0f"], d:"Apoyo escolar, lectura y tecnología para niñas, niños y adolescentes.", p:60, s:"320 estudiantes"},
@@ -210,6 +792,43 @@ const PROJECTS = [
   {n:"Mujeres Tejedoras", c:"Economía", g:["#2a2a2a","#d71920"], d:"Cooperativa de mujeres con capital semilla, capacitación y venta conjunta.", p:80, s:"64 socias"}
 ];
 
+const cats = ["Todos", ...new Set(PROJECTS.map(proyecto => proyecto.c))];
+const fEl = document.getElementById("filters");
+const pEl = document.getElementById("projects");
+
+function drawProjects(categoria = "Todos") {
+  fEl.innerHTML = cats.map(categoriaItem =>
+    `<button class="${categoriaItem === categoria ? "on" : ""}" data-c="${categoriaItem}">
+      ${categoriaItem}
+    </button>`
+  ).join("");
+
+  pEl.innerHTML = PROJECTS
+    .filter(proyecto => categoria === "Todos" || proyecto.c === categoria)
+    .map(proyecto => `
+      <article class="card">
+        <div class="top" style="background:linear-gradient(135deg,${proyecto.g[0]},${proyecto.g[1]})">${proyecto.n}</div>
+        <div class="body">
+          <span class="tag">${proyecto.c}</span>
+          <h3>${proyecto.n}</h3>
+          <p>${proyecto.d}</p>
+          <div class="bar" role="progressbar" aria-valuenow="${proyecto.p}" aria-valuemin="0" aria-valuemax="100">
+            <i style="width:${proyecto.p}%"></i>
+          </div>
+          <small>${proyecto.s} · ${proyecto.p}% de la meta</small>
+        </div>
+      </article>`
+    ).join("");
+}
+
+fEl.onclick = evento => {
+  const boton = evento.target.closest("button");
+  if (boton) drawProjects(boton.dataset.c);
+};
+
+drawProjects();
+
+/* GALERÍA Y VISOR */
 const MEDIA = [
   {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Jornada de limpieza del río", c:"#8f0f16", h:240},
@@ -217,80 +836,113 @@ const MEDIA = [
   {tipo:"video", src:"", t:"Testimonio: Huertos Vivos", c:"#d71920", h:220},
   {tipo:"foto", src:"", t:"Feria de productores", c:"#3a0b0e", h:280},
   {tipo:"foto", src:"", t:"Reforestación en la ribera", c:"#262626", h:230},
-  {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b3121b", h:260}
+  {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b31220", h:260}
 ];
 
-/* MENÚ */
-const menu=document.getElementById('menu'), mb=document.getElementById('menuBtn');
-const setMenu=o=>{menu.classList.toggle('open',o);mb.setAttribute('aria-expanded',o);mb.textContent=o?'Cerrar':'Menú'};
-mb.onclick=()=>setMenu(!menu.classList.contains('open'));
-menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){setMenu(false);closeLb()}});
+const gEl = document.getElementById("gal");
+const gF = document.getElementById("gFilters");
+let gCat = "Todo";
+let shown = [];
+let cur = 0;
 
-/* LÍNEA DE TIEMPO */
-const tl=document.getElementById('tl'), mini=document.getElementById('miniTl');
-TIMELINE.forEach((e,i)=>{
-  tl.insertAdjacentHTML('beforeend',`<details id="h${i}"><summary><span class="yr">${e.y}</span><span>${e.t}</span></summary><div class="txt">${e.d}</div></details>`);
-  mini.insertAdjacentHTML('beforeend',`<li><a href="#h${i}" data-i="${i}"><b>${e.k}</b> · ${e.t}</a></li>`);
+function mediaHTML(elemento, grande) {
+  if (elemento.yt) {
+    if (grande) {
+      return `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${elemento.yt}?autoplay=1&rel=0" title="${elemento.t}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    }
+
+    return `<img src="${elemento.src || `https://img.youtube.com/vi/${elemento.yt}/hqdefault.jpg`}" alt="${elemento.t}" loading="lazy">`;
+  }
+
+  if (elemento.src) {
+    if (elemento.tipo === "video") {
+      const controles = grande ? "controls autoplay" : "muted preload=\"metadata\"";
+      const poster = elemento.poster ? `poster="${elemento.poster}"` : "";
+      return `<video src="${elemento.src}" ${poster} ${controles}></video>`;
+    }
+
+    return `<img src="${elemento.src}" alt="${elemento.t}" loading="lazy">`;
+  }
+
+  return `<div class="ph" style="background:${elemento.c};${grande ? "" : `height:${elemento.h}px`}">
+    ${elemento.tipo === "video" ? "▶ " : ""}${elemento.t}
+  </div>`;
+}
+
+function drawGallery() {
+  gF.innerHTML = ["Todo", "foto", "video"].map(categoria =>
+    `<button class="${categoria === gCat ? "on" : ""}" data-c="${categoria}">
+      ${categoria === "Todo" ? "Todo" : categoria === "foto" ? "Fotos" : "Videos"}
+    </button>`
+  ).join("");
+
+  shown = MEDIA.filter(elemento => gCat === "Todo" || elemento.tipo === gCat);
+
+  gEl.innerHTML = shown.map((elemento, indice) =>
+    `<figure class="${elemento.tipo === "video" ? "vid" : ""}" data-i="${indice}" tabindex="0">
+      ${mediaHTML(elemento, false)}
+      <figcaption>${elemento.t}</figcaption>
+    </figure>`
+  ).join("");
+}
+
+gF.onclick = evento => {
+  const boton = evento.target.closest("button");
+  if (boton) {
+    gCat = boton.dataset.c;
+    drawGallery();
+  }
+};
+
+const lb = document.getElementById("lb");
+
+function openLightbox(indice) {
+  cur = (indice + shown.length) % shown.length;
+  const elemento = shown[cur];
+
+  document.getElementById("lbStage").innerHTML = mediaHTML(elemento, true);
+  document.getElementById("lbCap").innerHTML =
+    elemento.t + (elemento.yt
+      ? ` · <a href="https://www.youtube.com/watch?v=${elemento.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`
+      : "");
+
+  lb.classList.add("open");
+}
+
+function closeLightbox() {
+  lb.classList.remove("open");
+  document.getElementById("lbStage").innerHTML = "";
+}
+
+gEl.onclick = evento => {
+  const figura = evento.target.closest("figure");
+  if (figura) openLightbox(Number(figura.dataset.i));
+};
+
+gEl.onkeydown = evento => {
+  if (evento.key === "Enter") {
+    const figura = evento.target.closest("figure");
+    if (figura) openLightbox(Number(figura.dataset.i));
+  }
+};
+
+document.getElementById("lbX").onclick = closeLightbox;
+document.getElementById("lbP").onclick = () => openLightbox(cur - 1);
+document.getElementById("lbN").onclick = () => openLightbox(cur + 1);
+
+lb.onclick = evento => {
+  if (evento.target === lb) closeLightbox();
+};
+
+document.addEventListener("keydown", evento => {
+  if (evento.key === "Escape") {
+    setMenu(false);
+    closeLightbox();
+  }
 });
-mini.addEventListener('click',e=>{const a=e.target.closest('a');if(a)setTimeout(()=>document.getElementById('h'+a.dataset.i).open=true,50)});
 
-/* PROYECTOS */
-const cats=['Todos',...new Set(PROJECTS.map(p=>p.c))];
-const fEl=document.getElementById('filters'), pEl=document.getElementById('projects');
-
-function drawProjects(cat='Todos'){
-  fEl.innerHTML=cats.map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
-  pEl.innerHTML=PROJECTS.filter(p=>cat==='Todos'||p.c===cat).map(p=>`
-    <article class="card"><div class="top" style="background:linear-gradient(135deg,${p.g[0]},${p.g[1]})">${p.n}</div>
-    <div class="body"><span class="tag">${p.c}</span><h3>${p.n}</h3><p>${p.d}</p>
-    <div class="bar" role="progressbar" aria-valuenow="${p.p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p.p}%"></i></div>
-    <small>${p.s} · ${p.p}% de la meta</small></div></article>`).join('');
-}
-
-fEl.onclick=e=>{const b=e.target.closest('button');if(b)drawProjects(b.dataset.c)};
-drawProjects();
-
-/* GALERÍA Y VISOR */
-const gEl=document.getElementById('gal'), gF=document.getElementById('gFilters');
-let gCat='Todo', shown=[], cur=0;
-
-const media=(m,full)=>m.yt
-  ? (full?`<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${m.yt}?autoplay=1&rel=0" title="${m.t}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:`<img src="${m.src||'https://img.youtube.com/vi/'+m.yt+'/hqdefault.jpg'}" alt="${m.t}" loading="lazy">`)
-  : m.src
-  ? (m.tipo==='video'?`<video src="${m.src}" ${m.poster?`poster="${m.poster}"`:''} ${full?'controls autoplay':'muted preload="metadata"'}></video>`:`<img src="${m.src}" alt="${m.t}" loading="lazy">`)
-  : `<div class="ph" style="background:${m.c};${full?'':`height:${m.h}px`}">${m.tipo==='video'?'▶ ':''}${m.t}</div>`;
-
-function drawGal(){
-  gF.innerHTML=['Todo','foto','video'].map(c=>`<button class="${c===gCat?'on':''}" data-c="${c}">${c==='Todo'?'Todo':c==='foto'?'Fotos':'Videos'}</button>`).join('');
-  shown=MEDIA.filter(m=>gCat==='Todo'||m.tipo===gCat);
-  gEl.innerHTML=shown.map((m,i)=>`<figure class="${m.tipo==='video'?'vid':''}" data-i="${i}" tabindex="0">${media(m)}<figcaption>${m.t}</figcaption></figure>`).join('');
-}
-
-gF.onclick=e=>{const b=e.target.closest('button');if(b){gCat=b.dataset.c;drawGal()}};
-const lb=document.getElementById('lb');
-
-function openLb(i){
-  cur=(i+shown.length)%shown.length;
-  const m=shown[cur];
-  document.getElementById('lbStage').innerHTML=media(m,true);
-  document.getElementById('lbCap').innerHTML=m.t+(m.yt?` · <a href="https://www.youtube.com/watch?v=${m.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`:'');
-  lb.classList.add('open');
-}
-
-function closeLb(){
-  lb.classList.remove('open');
-  document.getElementById('lbStage').innerHTML='';
-}
-
-gEl.onclick=e=>{const f=e.target.closest('figure');if(f)openLb(+f.dataset.i)};
-gEl.onkeydown=e=>{if(e.key==='Enter'){const f=e.target.closest('figure');if(f)openLb(+f.dataset.i)}};
-document.getElementById('lbX').onclick=closeLb;
-document.getElementById('lbP').onclick=()=>openLb(cur-1);
-document.getElementById('lbN').onclick=()=>openLb(cur+1);
-lb.onclick=e=>{if(e.target===lb)closeLb()};
-
-drawGal();
+drawGallery();
 </script>
+
 </body>
 </html>
