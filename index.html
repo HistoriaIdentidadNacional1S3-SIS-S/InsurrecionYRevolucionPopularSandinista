@@ -7,9 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* ============ 1. CONFIGURACIÓN EDITABLE ============ */
 :root{
-  /* Cambia esta línea para poner tu imagen de fondo (ruta local o URL). Ej: url("img/portada.jpg") */
   --hero-img: url("img/portada.png");
   color-scheme:dark;
   --bg:#0b0b0b; --ink:#f4f1f0; --teal:#d71920; --sun:#ff4d4d; --mist:#2b2b2b; --white:#161616; --redtxt:#ff6b6b;
@@ -26,7 +24,7 @@ section{padding:88px 6vw}
 h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:12px}
 .lead{max-width:60ch;opacity:.8;margin-bottom:40px}
 
-/* ============ 2. BARRA + MENÚ DESPLEGABLE ============ */
+/* BARRA Y MENÚ */
 header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 6vw;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
 .logo{font:800 1.15rem var(--display);text-decoration:none}
 #menuBtn{font:600 1rem var(--body);background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 20px;cursor:pointer}
@@ -42,24 +40,14 @@ header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:s
 .mini b{font-family:var(--display)}
 .mini a:hover b{color:var(--redtxt)}
 
-/* ============ 3. HOMEPAGE ============ */
-#inicio{min-height:100vh;display:flex;align-items:flex-end;padding-bottom:9vh;color:#fff;
-  background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.45) 55%,rgba(0,0,0,.9)),var(--hero-img) center/cover no-repeat,#000}
+/* PORTADA */
+#inicio{min-height:100vh;display:flex;align-items:flex-end;padding-bottom:9vh;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.45) 55%,rgba(0,0,0,.9)),var(--hero-img) center/cover no-repeat,#000}
 #inicio h1{font-size:clamp(2.8rem,9vw,7rem);max-width:12ch}
 #inicio p{max-width:46ch;font-size:1.25rem;margin:22px 0 30px}
 .btn{display:inline-block;background:var(--teal);color:#fff;font:700 1rem var(--display);padding:14px 26px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
 .btn.ghost{background:transparent;color:#fff;border:2px solid #fff;margin-left:10px}
-#editBg{position:absolute;right:6vw;top:84px;background:rgba(0,0,0,.45);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:8px 16px;font:600 .9rem var(--body);cursor:pointer}
-#bgPanel{display:none;position:absolute;right:6vw;top:128px;width:min(340px,88vw);background:var(--white);color:var(--ink);border-radius:14px;padding:18px;box-shadow:0 14px 40px rgba(0,0,0,.3)}
-#bgPanel.open{display:block}
-#bgPanel label{display:block;font-weight:600;margin:10px 0 4px;font-size:.95rem}
-#bgPanel input[type=text]{width:100%;padding:9px;border:1px solid var(--mist);border-radius:8px;background:var(--bg);color:var(--ink)}
-#bgPanel .row{display:flex;gap:8px;margin-top:12px}
-#bgPanel button{flex:1;padding:9px;border-radius:8px;border:0;font-weight:600;cursor:pointer;background:var(--teal);color:#fff}
-#bgPanel button.sec{background:var(--mist);color:var(--ink)}
-#bgPanel{border:1px solid var(--mist)}
 
-/* ============ 4. LÍNEA DE TIEMPO ============ */
+/* LÍNEA DE TIEMPO */
 .tl{position:relative;margin-left:8px;border-left:4px solid var(--teal);padding-left:34px}
 .tl details{position:relative;margin-bottom:18px;background:var(--white);border:1px solid var(--mist);border-radius:14px}
 .tl details::before{content:"";position:absolute;left:-47px;top:24px;width:18px;height:18px;border-radius:50%;background:var(--teal);border:4px solid var(--bg)}
@@ -70,7 +58,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:s
 .tl details[open] summary{border-bottom:1px solid var(--mist)}
 .tl .txt{padding:16px 22px 20px;max-width:62ch}
 
-/* ============ 5. PROYECTOS ============ */
+/* PROYECTOS */
 #proyectos{background:#8f0f16}
 #proyectos .filters button{border-color:#fff;color:#fff}
 #proyectos .filters button.on{background:#fff;color:#8f0f16}
@@ -92,7 +80,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:s
 .bar i{display:block;height:100%;background:var(--sun)}
 .card small{display:block;margin-top:6px;opacity:.75}
 
-/* ============ 6. GALERÍA ============ */
+/* GALERÍA */
 .gal{columns:3 240px;column-gap:16px}
 .gal figure{break-inside:avoid;margin-bottom:16px;position:relative;cursor:zoom-in;border-radius:12px;overflow:hidden;background:var(--mist)}
 .gal img,.gal video,.gal .ph{display:block;width:100%}
@@ -109,7 +97,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:s
 #lbX{top:20px;right:20px}#lbP{left:20px;top:50%}#lbN{right:20px;top:50%}
 #lbCap{margin-top:16px}
 
-/* ============ BIBLIOGRAFÍA ============ */
+/* BIBLIOGRAFÍA */
 #bibliografia{background:var(--white)}
 .biblio{max-width:70ch}
 .biblio h3{font-size:1.5rem;margin:40px 0 12px;color:var(--redtxt)}
@@ -139,16 +127,7 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   <ul class="mini" id="miniTl"></ul>
 </div>
 
-<!-- HOMEPAGE -->
 <section id="inicio">
-  <button id="editBg">Editar fondo</button>
-  <div id="bgPanel">
-    <label for="bgFile">Subir una imagen</label>
-    <input type="file" id="bgFile" accept="image/*">
-    <label for="bgUrl">o pega un enlace / ruta</label>
-    <input type="text" id="bgUrl" placeholder="img/portada.jpg">
-    <div class="row"><button id="bgApply">Aplicar</button><button class="sec" id="bgReset">Restaurar</button></div>
-  </div>
   <div class="wrap">
     <h1>Insurrecion Y Revolucion Popular Sandinista</h1>
     <p>Trabajamos con vecinos, jóvenes y organizaciones para convertir problemas locales en proyectos que duran.</p>
@@ -156,7 +135,6 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
-<!-- LÍNEA DE TIEMPO -->
 <section id="historia">
   <div class="wrap">
     <h2>Línea de tiempo</h2>
@@ -165,7 +143,6 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
-<!-- PROYECTOS -->
 <section id="proyectos">
   <div class="wrap">
     <h2>Proyectos de transformación social</h2>
@@ -175,7 +152,6 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
-<!-- GALERÍA -->
 <section id="galeria">
   <div class="wrap">
     <h2>Galería multimedia</h2>
@@ -185,13 +161,11 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
   </div>
 </section>
 
-<!-- BIBLIOGRAFÍA -->
 <section id="bibliografia">
   <div class="wrap">
     <h2>Bibliografía</h2>
     <p class="lead">Fuentes y textos de referencia de este sitio.</p>
     <article class="biblio" id="biblioText">
-      <!-- PEGA AQUÍ EL TEXTO: usa <h3> para subtítulos y <p> para cada párrafo -->
       <div class="vacio">Aquí irá el texto de la bibliografía.</div>
     </article>
   </div>
@@ -202,13 +176,15 @@ footer{padding:44px 6vw;background:#000;color:#f4f1f0;text-align:center;border-t
 </footer>
 
 <div id="lb" role="dialog" aria-modal="true" aria-label="Visor">
-  <button id="lbX" aria-label="Cerrar">×</button><button id="lbP" aria-label="Anterior">‹</button><button id="lbN" aria-label="Siguiente">›</button>
-  <div class="stage" id="lbStage"></div><div id="lbCap"></div>
+  <button id="lbX" aria-label="Cerrar">×</button>
+  <button id="lbP" aria-label="Anterior">‹</button>
+  <button id="lbN" aria-label="Siguiente">›</button>
+  <div class="stage" id="lbStage"></div>
+  <div id="lbCap"></div>
 </div>
 
 <script>
-/* ============ CONTENIDO EDITABLE: cambia solo estos datos ============ */
-const TIMELINE = [  /* y = fecha completa, k = etiqueta corta para el menú, t = título, d = descripción */
+const TIMELINE = [
   {y:"21 de febrero de 1934", k:"1934", t:"Asesinato de Augusto C. Sandino", d:"La Guardia Nacional persigue luego a integrantes de su movimiento y a comunidades rurales."},
   {y:"1936–1937", k:"1936", t:"Somoza García consolida su poder", d:"Anastasio Somoza García asume la presidencia en 1937 y establece las bases de la dictadura."},
   {y:"1944", k:"1944", t:"Movilización contra Somoza", d:"Estudiantes y sectores populares se movilizan para exigir la salida de Somoza; la Guardia Nacional reprime las protestas."},
@@ -225,6 +201,7 @@ const TIMELINE = [  /* y = fecha completa, k = etiqueta corta para el menú, t =
   {y:"Década de 1980", k:"Años 80", t:"Reformas en medio de la guerra", d:"El gobierno revolucionario impulsa políticas y reformas en medio de la guerra y de dificultades económicas."},
   {y:"1990", k:"1990", t:"Elecciones de 1990", d:"La Unión Nacional Opositora gana las elecciones y el FSLN deja el gobierno."}
 ];
+
 const PROJECTS = [
   {n:"Huertos Vivos", c:"Alimentación", g:["#8f0f16","#d71920"], d:"Huertos familiares y mercado local para asegurar comida sana todo el año.", p:75, s:"150 familias"},
   {n:"Escuela de Barrio", c:"Educación", g:["#111","#5a0a0f"], d:"Apoyo escolar, lectura y tecnología para niñas, niños y adolescentes.", p:60, s:"320 estudiantes"},
@@ -232,7 +209,8 @@ const PROJECTS = [
   {n:"Agua y Río", c:"Ambiente", g:["#000","#8f0f16"], d:"Recuperación de cauces, reforestación y vigilancia ciudadana del agua.", p:45, s:"8 km recuperados"},
   {n:"Mujeres Tejedoras", c:"Economía", g:["#2a2a2a","#d71920"], d:"Cooperativa de mujeres con capital semilla, capacitación y venta conjunta.", p:80, s:"64 socias"}
 ];
-const MEDIA = [  /* tipo: "foto" | "video". Para YouTube agrega yt:"ID_DEL_VIDEO" (src = imagen de miniatura). Pon tu archivo en src (ej: "img/foto1.jpg" o "video/clip.mp4"). Sin src se muestra un recuadro de color. */
+
+const MEDIA = [
   {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Jornada de limpieza del río", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Taller en la escuela de barrio", c:"#1a1a1a", h:300},
@@ -242,14 +220,14 @@ const MEDIA = [  /* tipo: "foto" | "video". Para YouTube agrega yt:"ID_DEL_VIDEO
   {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b3121b", h:260}
 ];
 
-/* ============ MENÚ ============ */
+/* MENÚ */
 const menu=document.getElementById('menu'), mb=document.getElementById('menuBtn');
 const setMenu=o=>{menu.classList.toggle('open',o);mb.setAttribute('aria-expanded',o);mb.textContent=o?'Cerrar':'Menú'};
 mb.onclick=()=>setMenu(!menu.classList.contains('open'));
 menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){setMenu(false);closeLb()}});
 
-/* ============ LÍNEA DE TIEMPO ============ */
+/* LÍNEA DE TIEMPO */
 const tl=document.getElementById('tl'), mini=document.getElementById('miniTl');
 TIMELINE.forEach((e,i)=>{
   tl.insertAdjacentHTML('beforeend',`<details id="h${i}"><summary><span class="yr">${e.y}</span><span>${e.t}</span></summary><div class="txt">${e.d}</div></details>`);
@@ -257,9 +235,10 @@ TIMELINE.forEach((e,i)=>{
 });
 mini.addEventListener('click',e=>{const a=e.target.closest('a');if(a)setTimeout(()=>document.getElementById('h'+a.dataset.i).open=true,50)});
 
-/* ============ PROYECTOS ============ */
+/* PROYECTOS */
 const cats=['Todos',...new Set(PROJECTS.map(p=>p.c))];
 const fEl=document.getElementById('filters'), pEl=document.getElementById('projects');
+
 function drawProjects(cat='Todos'){
   fEl.innerHTML=cats.map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
   pEl.innerHTML=PROJECTS.filter(p=>cat==='Todos'||p.c===cat).map(p=>`
@@ -268,46 +247,50 @@ function drawProjects(cat='Todos'){
     <div class="bar" role="progressbar" aria-valuenow="${p.p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p.p}%"></i></div>
     <small>${p.s} · ${p.p}% de la meta</small></div></article>`).join('');
 }
+
 fEl.onclick=e=>{const b=e.target.closest('button');if(b)drawProjects(b.dataset.c)};
 drawProjects();
 
-/* ============ GALERÍA + VISOR ============ */
+/* GALERÍA Y VISOR */
 const gEl=document.getElementById('gal'), gF=document.getElementById('gFilters');
 let gCat='Todo', shown=[], cur=0;
+
 const media=(m,full)=>m.yt
   ? (full?`<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${m.yt}?autoplay=1&rel=0" title="${m.t}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:`<img src="${m.src||'https://img.youtube.com/vi/'+m.yt+'/hqdefault.jpg'}" alt="${m.t}" loading="lazy">`)
   : m.src
   ? (m.tipo==='video'?`<video src="${m.src}" ${m.poster?`poster="${m.poster}"`:''} ${full?'controls autoplay':'muted preload="metadata"'}></video>`:`<img src="${m.src}" alt="${m.t}" loading="lazy">`)
   : `<div class="ph" style="background:${m.c};${full?'':`height:${m.h}px`}">${m.tipo==='video'?'▶ ':''}${m.t}</div>`;
+
 function drawGal(){
   gF.innerHTML=['Todo','foto','video'].map(c=>`<button class="${c===gCat?'on':''}" data-c="${c}">${c==='Todo'?'Todo':c==='foto'?'Fotos':'Videos'}</button>`).join('');
   shown=MEDIA.filter(m=>gCat==='Todo'||m.tipo===gCat);
   gEl.innerHTML=shown.map((m,i)=>`<figure class="${m.tipo==='video'?'vid':''}" data-i="${i}" tabindex="0">${media(m)}<figcaption>${m.t}</figcaption></figure>`).join('');
 }
+
 gF.onclick=e=>{const b=e.target.closest('button');if(b){gCat=b.dataset.c;drawGal()}};
 const lb=document.getElementById('lb');
-function openLb(i){cur=(i+shown.length)%shown.length;const m=shown[cur];
-  document.getElementById('lbStage').innerHTML=media(m,true);document.getElementById('lbCap').innerHTML=m.t+(m.yt?` · <a href="https://www.youtube.com/watch?v=${m.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`:'');lb.classList.add('open')}
-function closeLb(){lb.classList.remove('open');document.getElementById('lbStage').innerHTML=''}
+
+function openLb(i){
+  cur=(i+shown.length)%shown.length;
+  const m=shown[cur];
+  document.getElementById('lbStage').innerHTML=media(m,true);
+  document.getElementById('lbCap').innerHTML=m.t+(m.yt?` · <a href="https://www.youtube.com/watch?v=${m.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`:'');
+  lb.classList.add('open');
+}
+
+function closeLb(){
+  lb.classList.remove('open');
+  document.getElementById('lbStage').innerHTML='';
+}
+
 gEl.onclick=e=>{const f=e.target.closest('figure');if(f)openLb(+f.dataset.i)};
 gEl.onkeydown=e=>{if(e.key==='Enter'){const f=e.target.closest('figure');if(f)openLb(+f.dataset.i)}};
 document.getElementById('lbX').onclick=closeLb;
 document.getElementById('lbP').onclick=()=>openLb(cur-1);
 document.getElementById('lbN').onclick=()=>openLb(cur+1);
 lb.onclick=e=>{if(e.target===lb)closeLb()};
-drawGal();
 
-/* ============ FONDO EDITABLE ============ */
-const root=document.documentElement, panel=document.getElementById('bgPanel');
-const setBg=u=>root.style.setProperty('--hero-img',`url("${u}")`);
-try{const s=localStorage.getItem('heroBg');if(s)setBg(s)}catch(e){}
-document.getElementById('editBg').onclick=()=>panel.classList.toggle('open');
-document.getElementById('bgFile').onchange=e=>{
-  const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{setBg(r.result);try{localStorage.setItem('heroBg',r.result)}catch(x){}};r.readAsDataURL(f)};
-document.getElementById('bgApply').onclick=()=>{
-  const u=document.getElementById('bgUrl').value.trim();if(!u)return;setBg(u);try{localStorage.setItem('heroBg',u)}catch(e){}};
-document.getElementById('bgReset').onclick=()=>{root.style.removeProperty('--hero-img');try{localStorage.removeItem('heroBg')}catch(e){}};
+drawGal();
 </script>
 </body>
 </html>
