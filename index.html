@@ -421,10 +421,6 @@ header {
   width: 100%;
 }
 
-.gal img {
-  height: auto;
-}
-
 .gal .ph {
   display: flex;
   align-items: center;
@@ -527,6 +523,48 @@ header {
 #lbP { left: 20px; top: 50%; }
 #lbN { right: 20px; top: 50%; }
 #lbCap { margin-top: 16px; }
+
+/* BIBLIOGRAFÍA */
+#bibliografia {
+  background: var(--white);
+}
+
+.biblio {
+  max-width: 70ch;
+}
+
+.biblio h3 {
+  font-size: 1.5rem;
+  margin: 40px 0 12px;
+  color: var(--redtxt);
+}
+
+.biblio p {
+  margin-bottom: 1.1em;
+  line-height: 1.75;
+}
+
+.biblio .vacio {
+  border: 2px dashed var(--mist);
+  border-radius: 14px;
+  padding: 28px;
+  opacity: .8;
+}
+
+footer {
+  padding: 44px 6vw;
+  background: #000;
+  color: #f4f1f0;
+  text-align: center;
+  border-top: 6px solid var(--teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 @media (max-width: 600px) {
   .tl { padding-left: 24px; }
@@ -718,8 +756,8 @@ function drawProjects(categoria = "Todos") {
           </div>
           <small>${proyecto.s} · ${proyecto.p}% de la meta</small>
         </div>
-      </article>`)
-    .join("");
+      </article>`
+    ).join("");
 }
 
 fEl.onclick = evento => {
@@ -730,19 +768,14 @@ fEl.onclick = evento => {
 drawProjects();
 
 /* GALERÍA Y VISOR */
-const FONDOS = Array.from({ length: 6 }, (_, i) => {
-  const numero = String(i + 1).padStart(3, "0");
-  return {
-    tipo: "foto",
-    src: `Fondos/${numero}.jpg`,
-    t: `Fondo ${numero}`
-  };
-});
-
 const MEDIA = [
-  {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua"},
-  {tipo:"video", vimeo:"1240654103", t:"Vid1"},
-  ...FONDOS
+  {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua", c:"#8f0f16", h:240},
+  {tipo:"foto", src:"", t:"Jornada de limpieza del río", c:"#8f0f16", h:240},
+  {tipo:"foto", src:"", t:"Taller en la escuela de barrio", c:"#1a1a1a", h:300},
+  {tipo:"video", vimeo:"1240654103", t:"Vid1", c:"#d71920", h:220},
+  {tipo:"foto", src:"", t:"Feria de productores", c:"#3a0b0e", h:280},
+  {tipo:"foto", src:"", t:"Reforestación en la ribera", c:"#262626", h:230},
+  {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b31220", h:260}
 ];
 
 const gEl = document.getElementById("gal");
@@ -792,7 +825,7 @@ function drawGallery() {
   gEl.innerHTML = shown.map((elemento, indice) =>
     `<figure class="${elemento.tipo === "video" ? "vid" : ""}" data-i="${indice}" tabindex="0">
       ${mediaHTML(elemento, false)}
-      <figcaption>${elemento.t}</figcaption>
+      ${elemento.t ? `<figcaption>${elemento.t}</figcaption>` : ""}
     </figure>`
   ).join("");
 }
@@ -808,14 +841,12 @@ gF.onclick = evento => {
 const lb = document.getElementById("lb");
 
 function openLightbox(indice) {
-  if (!shown.length) return;
-
   cur = (indice + shown.length) % shown.length;
   const elemento = shown[cur];
 
   document.getElementById("lbStage").innerHTML = mediaHTML(elemento, true);
   document.getElementById("lbCap").innerHTML =
-    elemento.t + (elemento.yt
+    (elemento.t || "") + (elemento.yt
       ? ` · <a href="https://www.youtube.com/watch?v=${elemento.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`
       : elemento.vimeo
         ? ` · <a href="https://vimeo.com/${elemento.vimeo}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en Vimeo</a>`
