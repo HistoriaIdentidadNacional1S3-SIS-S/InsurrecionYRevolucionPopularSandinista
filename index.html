@@ -224,38 +224,6 @@ header {
   margin-left: 10px;
 }
 
-/* SIETE FONDOS EN CASCADA */
-.fondo-cascada {
-  position: relative;
-  min-height: 75vh;
-  display: flex;
-  align-items: flex-end;
-  padding: 9vh 6vw;
-  color: #fff;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: #111;
-}
-
-.fondo-cascada::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,.08),
-    rgba(0,0,0,.2) 45%,
-    rgba(0,0,0,.8)
-  );
-  pointer-events: none;
-}
-
-.fondo-cascada .wrap {
-  position: relative;
-  z-index: 1;
-}
-
 /* LÍNEA DE TIEMPO */
 .tl {
   position: relative;
@@ -629,15 +597,6 @@ footer {
   </div>
 </section>
 
-<!-- FONDOS CONSECUTIVOS -->
-<section class="fondo-cascada" data-fondo="001"><div class="wrap"><h2>Memoria de la Revolución</h2></div></section>
-<section class="fondo-cascada" data-fondo="002"><div class="wrap"><h2>La lucha por la transformación</h2></div></section>
-<section class="fondo-cascada" data-fondo="003"><div class="wrap"><h2>El triunfo de 1979</h2></div></section>
-<section class="fondo-cascada" data-fondo="004"><div class="wrap"><h2>Legado y memoria colectiva</h2></div></section>
-<section class="fondo-cascada" data-fondo="005"><div class="wrap"><h2></h2></div></section>
-<section class="fondo-cascada" data-fondo="006"><div class="wrap"><h2></h2></div></section>
-<section class="fondo-cascada" data-fondo="007"><div class="wrap"><h2></h2></div></section>
-
 <!-- LÍNEA DE TIEMPO -->
 <section id="historia">
   <div class="wrap">
@@ -691,32 +650,6 @@ footer {
 </div>
 
 <script>
-/* CARGA LOS FONDOS 001–007 */
-const extensionesFondo = ["jpg", "jpeg", "png", "webp", "avif"];
-
-document.querySelectorAll(".fondo-cascada").forEach(seccion => {
-  const numero = seccion.dataset.fondo;
-
-  const intentarCargar = indice => {
-    if (indice >= extensionesFondo.length) {
-      console.warn(`No se encontró Fondos/${numero} con extensión compatible.`);
-      return;
-    }
-
-    const ruta = `Fondos/${numero}.${extensionesFondo[indice]}`;
-    const imagen = new Image();
-
-    imagen.onload = () => {
-      seccion.style.backgroundImage = `url("${ruta}")`;
-    };
-
-    imagen.onerror = () => intentarCargar(indice + 1);
-    imagen.src = ruta;
-  };
-
-  intentarCargar(0);
-});
-
 /* MENÚ */
 const menu = document.getElementById("menu");
 const mb = document.getElementById("menuBtn");
@@ -833,7 +766,7 @@ const MEDIA = [
   {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Jornada de limpieza del río", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Taller en la escuela de barrio", c:"#1a1a1a", h:300},
-  {tipo:"video", src:"", t:"Testimonio: Huertos Vivos", c:"#d71920", h:220},
+  {tipo:"video", src:"Videos/Vid1.mp4", t:"Vid1.mp4", c:"#d71920", h:220},
   {tipo:"foto", src:"", t:"Feria de productores", c:"#3a0b0e", h:280},
   {tipo:"foto", src:"", t:"Reforestación en la ribera", c:"#262626", h:230},
   {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b31220", h:260}
