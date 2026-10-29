@@ -421,6 +421,10 @@ header {
   width: 100%;
 }
 
+.gal img {
+  height: auto;
+}
+
 .gal .ph {
   display: flex;
   align-items: center;
@@ -768,14 +772,19 @@ fEl.onclick = evento => {
 drawProjects();
 
 /* GALERÍA Y VISOR */
+const FONDOS = Array.from({ length: 6 }, (_, i) => {
+  const numero = String(i + 1).padStart(3, "0");
+  return {
+    tipo: "foto",
+    src: `Fondos/${numero}.jpg`,
+    t: ""
+  };
+});
+
 const MEDIA = [
-  {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua", c:"#8f0f16", h:240},
-  {tipo:"foto", src:"", t:"Jornada de limpieza del río", c:"#8f0f16", h:240},
-  {tipo:"foto", src:"", t:"Taller en la escuela de barrio", c:"#1a1a1a", h:300},
-  {tipo:"video", vimeo:"1240654103", t:"Vid1", c:"#d71920", h:220},
-  {tipo:"foto", src:"", t:"Feria de productores", c:"#3a0b0e", h:280},
-  {tipo:"foto", src:"", t:"Reforestación en la ribera", c:"#262626", h:230},
-  {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b31220", h:260}
+  {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua"},
+  {tipo:"video", vimeo:"1240654103", t:"Vid1"},
+  ...FONDOS
 ];
 
 const gEl = document.getElementById("gal");
@@ -794,23 +803,14 @@ function mediaHTML(elemento, grande) {
     if (grande) {
       return `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${elemento.yt}?autoplay=1&rel=0" title="${elemento.t}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     }
-
-    return `<img src="${elemento.src || `https://img.youtube.com/vi/${elemento.yt}/hqdefault.jpg`}" alt="${elemento.t}" loading="lazy">`;
+    return `<img src="https://img.youtube.com/vi/${elemento.yt}/hqdefault.jpg" alt="Video de la Revolución Sandinista" loading="lazy">`;
   }
 
-  if (elemento.src) {
-    if (elemento.tipo === "video") {
-      const controles = grande ? "controls autoplay" : "muted preload=\"metadata\"";
-      const poster = elemento.poster ? `poster="${elemento.poster}"` : "";
-      return `<video src="${elemento.src}" ${poster} ${controles}></video>`;
-    }
-
-    return `<img src="${elemento.src}" alt="${elemento.t}" loading="lazy">`;
+  if (elemento.tipo === "foto" && elemento.src) {
+    return `<img src="${elemento.src}" alt="" loading="lazy" onerror="this.closest('figure').style.display='none'">`;
   }
 
-  return `<div class="ph" style="background:${elemento.c};${grande ? "" : `height:${elemento.h}px`}">
-    ${elemento.tipo === "video" ? "▶ " : ""}${elemento.t}
-  </div>`;
+  return `<div class="ph">${elemento.t || ""}</div>`;
 }
 
 function drawGallery() {
@@ -821,7 +821,6 @@ function drawGallery() {
   ).join("");
 
   shown = MEDIA.filter(elemento => gCat === "Todo" || elemento.tipo === gCat);
-
   gEl.innerHTML = shown.map((elemento, indice) =>
     `<figure class="${elemento.tipo === "video" ? "vid" : ""}" data-i="${indice}" tabindex="0">
       ${mediaHTML(elemento, false)}
@@ -841,17 +840,15 @@ gF.onclick = evento => {
 const lb = document.getElementById("lb");
 
 function openLightbox(indice) {
+  if (!shown.length) return;
   cur = (indice + shown.length) % shown.length;
   const elemento = shown[cur];
-
   document.getElementById("lbStage").innerHTML = mediaHTML(elemento, true);
-  document.getElementById("lbCap").innerHTML =
-    (elemento.t || "") + (elemento.yt
-      ? ` · <a href="https://www.youtube.com/watch?v=${elemento.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`
-      : elemento.vimeo
-        ? ` · <a href="https://vimeo.com/${elemento.vimeo}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en Vimeo</a>`
-        : "");
-
+  document.getElementById("lbCap").innerHTML = elemento.yt
+    ? `<a href="https://www.youtube.com/watch?v=${elemento.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`
+    : elemento.vimeo
+      ? `<a href="https://vimeo.com/${elemento.vimeo}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en Vimeo</a>`
+      : "";
   lb.classList.add("open");
 }
 
@@ -875,10 +872,7 @@ gEl.onkeydown = evento => {
 document.getElementById("lbX").onclick = closeLightbox;
 document.getElementById("lbP").onclick = () => openLightbox(cur - 1);
 document.getElementById("lbN").onclick = () => openLightbox(cur + 1);
-
-lb.onclick = evento => {
-  if (evento.target === lb) closeLightbox();
-};
+lb.onclick = evento => { if (evento.target === lb) closeLightbox(); };
 
 document.addEventListener("keydown", evento => {
   if (evento.key === "Escape") {
