@@ -416,7 +416,7 @@ header {
   background: var(--mist);
 }
 
-.gal img, .gal video, .gal .ph {
+.gal img, .gal video, .gal iframe, .gal .ph {
   display: block;
   width: 100%;
 }
@@ -455,6 +455,12 @@ header {
   font-size: .8rem;
 }
 
+.gal .vimeo {
+  aspect-ratio: 16/9;
+  border: 0;
+  background: #000;
+}
+
 #lb {
   position: fixed;
   inset: 0;
@@ -483,7 +489,7 @@ header {
   border-radius: 10px;
 }
 
-#lb .yt {
+#lb .yt, #lb .vimeo {
   width: min(92vw, 980px);
   aspect-ratio: 16/9;
   border: 0;
@@ -766,7 +772,7 @@ const MEDIA = [
   {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Jornada de limpieza del río", c:"#8f0f16", h:240},
   {tipo:"foto", src:"", t:"Taller en la escuela de barrio", c:"#1a1a1a", h:300},
-  {tipo:"video", src:"Videos/Vid1.mp4", t:"Vid1.mp4", c:"#d71920", h:220},
+  {tipo:"video", vimeo:"1240654103", t:"Vid1", c:"#d71920", h:220},
   {tipo:"foto", src:"", t:"Feria de productores", c:"#3a0b0e", h:280},
   {tipo:"foto", src:"", t:"Reforestación en la ribera", c:"#262626", h:230},
   {tipo:"video", src:"", t:"Cierre del programa de jóvenes", c:"#b31220", h:260}
@@ -779,6 +785,11 @@ let shown = [];
 let cur = 0;
 
 function mediaHTML(elemento, grande) {
+  if (elemento.vimeo) {
+    const autoplay = grande ? "?autoplay=1" : "";
+    return `<iframe class="vimeo" src="https://player.vimeo.com/video/${elemento.vimeo}${autoplay}" title="${elemento.t}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+  }
+
   if (elemento.yt) {
     if (grande) {
       return `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${elemento.yt}?autoplay=1&rel=0" title="${elemento.t}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
@@ -837,7 +848,9 @@ function openLightbox(indice) {
   document.getElementById("lbCap").innerHTML =
     elemento.t + (elemento.yt
       ? ` · <a href="https://www.youtube.com/watch?v=${elemento.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`
-      : "");
+      : elemento.vimeo
+        ? ` · <a href="https://vimeo.com/${elemento.vimeo}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en Vimeo</a>`
+        : "");
 
   lb.classList.add("open");
 }
