@@ -493,7 +493,7 @@ header {
   border-radius: 10px;
 }
 
-#lb .yt, #lb .vimeo {
+#lb .vimeo {
   width: min(92vw, 980px);
   aspect-ratio: 16/9;
   border: 0;
@@ -782,8 +782,7 @@ const FONDOS = Array.from({ length: 6 }, (_, i) => {
 });
 
 const MEDIA = [
-  {tipo:"video", yt:"tMgb0zGjNYs", src:"img/poster-revolucion.jpg", t:"Así fue la Revolución Sandinista en Nicaragua"},
-  {tipo:"video", vimeo:"1240654103", t:"Vid1"},
+  {tipo:"video", vimeo:"1240654103", t:""},
   ...FONDOS
 ];
 
@@ -796,14 +795,7 @@ let cur = 0;
 function mediaHTML(elemento, grande) {
   if (elemento.vimeo) {
     const autoplay = grande ? "?autoplay=1" : "";
-    return `<iframe class="vimeo" src="https://player.vimeo.com/video/${elemento.vimeo}${autoplay}" title="${elemento.t}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
-  }
-
-  if (elemento.yt) {
-    if (grande) {
-      return `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${elemento.yt}?autoplay=1&rel=0" title="${elemento.t}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-    }
-    return `<img src="https://img.youtube.com/vi/${elemento.yt}/hqdefault.jpg" alt="Video de la Revolución Sandinista" loading="lazy">`;
+    return `<iframe class="vimeo" src="https://player.vimeo.com/video/${elemento.vimeo}${autoplay}" title="Video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
   }
 
   if (elemento.tipo === "foto" && elemento.src) {
@@ -844,11 +836,9 @@ function openLightbox(indice) {
   cur = (indice + shown.length) % shown.length;
   const elemento = shown[cur];
   document.getElementById("lbStage").innerHTML = mediaHTML(elemento, true);
-  document.getElementById("lbCap").innerHTML = elemento.yt
-    ? `<a href="https://www.youtube.com/watch?v=${elemento.yt}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en YouTube</a>`
-    : elemento.vimeo
-      ? `<a href="https://vimeo.com/${elemento.vimeo}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en Vimeo</a>`
-      : "";
+  document.getElementById("lbCap").innerHTML = elemento.vimeo
+    ? `<a href="https://vimeo.com/${elemento.vimeo}" target="_blank" rel="noopener" style="color:#ff6b6b">Ver en Vimeo</a>`
+    : "";
   lb.classList.add("open");
 }
 
