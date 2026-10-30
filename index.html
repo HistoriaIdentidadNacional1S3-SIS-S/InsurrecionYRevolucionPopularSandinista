@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Raíces en Movimiento · Transformación social</title>
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
@@ -648,6 +648,128 @@ header {
 #lbN { right: 20px; top: 50%; }
 #lbCap { margin-top: 16px; }
 
+/* TESTIMONIOS (FLASH CARDS) */
+.fc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.fc {
+  perspective: 1200px;
+  height: 540px;
+}
+
+.fc-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .6s;
+}
+
+.fc.flip .fc-inner {
+  transform: rotateY(180deg);
+}
+
+.fc-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px solid var(--mist);
+  background: var(--white);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.fc-front {
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 26px 24px;
+  cursor: pointer;
+  background: linear-gradient(160deg, #8f0f16, #161616 70%);
+  transition: visibility 0s .3s;
+}
+
+.fc.flip .fc-front {
+  visibility: hidden;
+}
+
+.fc-back {
+  transform: rotateY(180deg);
+  visibility: hidden;
+  transition: visibility 0s .3s;
+}
+
+.fc.flip .fc-back {
+  visibility: visible;
+}
+
+.fc-tag {
+  font: 600 .9rem var(--body);
+  color: var(--redtxt);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.fc-front h3 {
+  font-size: 1.7rem;
+}
+
+.fc-front p {
+  opacity: .85;
+  font-size: 1rem;
+}
+
+.fc-open,
+.fc-close {
+  align-self: flex-start;
+  font: 700 .95rem var(--display);
+  color: #fff;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+}
+
+.fc-open:hover,
+.fc-close:hover {
+  background: rgba(255, 255, 255, .15);
+}
+
+.fc-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--mist);
+}
+
+.fc-head h3 {
+  font-size: 1.25rem;
+}
+
+.fc-text {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 22px;
+  font-size: .98rem;
+  line-height: 1.6;
+}
+
+.fc-text p {
+  margin-bottom: 1em;
+}
+
+.fc-foot {
+  padding: 12px 22px 16px;
+  border-top: 1px solid var(--mist);
+}
+
 /* BIBLIOGRAFÍA */
 #bibliografia {
   background: var(--white);
@@ -712,6 +834,7 @@ footer {
     <a href="#historia">Línea de tiempo</a>
     <a href="#proyectos">Proyectos de transformación</a>
     <a href="#galeria">Galería multimedia</a>
+    <a href="#testimonios">Testimonios</a>
     <a href="#bibliografia">Bibliografía</a>
   </nav>
   <h4>Linea de tiempo: ve directo a una fecha</h4>
@@ -763,6 +886,16 @@ footer {
   </div>
 </section>
 
+<!-- TESTIMONIOS -->
+<section id="testimonios" hidden>
+  <div class="wrap">
+    <a class="back" href="#inicio">← Regresar</a>
+    <h2>Testimonios</h2>
+    <p class="lead">Toca una tarjeta para leer el testimonio completo. Toca "Volver" para regresar al frente.</p>
+    <div class="fc-grid" id="fcGrid"></div>
+  </div>
+</section>
+
 <!-- BIBLIOGRAFÍA -->
 <section id="bibliografia" hidden>
   <div class="wrap">
@@ -809,7 +942,7 @@ menu.addEventListener("click", evento => {
 });
 
 /* NAVEGACIÓN ENTRE PÁGINAS (cada sección es una pantalla aparte) */
-const VISTAS = ["inicio", "historia", "proyectos", "galeria", "bibliografia"];
+const VISTAS = ["inicio", "historia", "proyectos", "galeria", "testimonios", "bibliografia"];
 let hitoPendiente = null;
 
 function route() {
@@ -843,7 +976,8 @@ const mini = document.getElementById("miniTl");
 const TIMELINE = [
   {y:"21 de febrero de 1934", k:"1934", t:"Asesinato de Augusto C. Sandino", d:"La Guardia Nacional persigue luego a integrantes de su movimiento y a comunidades rurales.",
    embed:`<div class="tl-video" style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1241167263?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Sandino, la noche que fue traicionado"></iframe></div>`},
-  {y:"1936–1937", k:"1936", t:"Somoza García consolida su poder", d:"Anastasio Somoza García asume la presidencia en 1937 y establece las bases de la dictadura."},
+  {y:"1936–1937", k:"1936", t:"Somoza García consolida su poder", d:"Anastasio Somoza García asume la presidencia en 1937 y establece las bases de la dictadura.",
+   embed:`<div class="tl-video" style="padding:56.25% 0 0 0;position:relative;"><iframe title="vimeo-player" src="https://player.vimeo.com/video/1241175926?h=0a655130b0" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>`},
   {y:"1944", k:"1944", t:"Movilización contra Somoza", d:"Estudiantes y sectores populares se movilizan para exigir la salida de Somoza; la Guardia Nacional reprime las protestas."},
   {y:"1961", k:"1961", t:"Nace el FSLN", d:"Se forma el Frente de Liberación Nacional, que posteriormente adopta el nombre de Frente Sandinista de Liberación Nacional (FSLN)."},
   {y:"1963", k:"1963", t:"Raití y Walaquistán", d:"Una columna guerrillera incursiona desde Honduras y enfrenta a la Guardia Nacional en Raití y Walaquistán."},
@@ -1036,6 +1170,96 @@ document.addEventListener("keydown", evento => {
 });
 
 drawGallery();
+
+/* TESTIMONIOS (FLASH CARDS) */
+const TESTIMONIOS = [
+  {
+    n: "María del Socorro Téllez",
+    s: "Estudiante en Managua · Movilizaciones de 1944",
+    p: [
+      "En 1944 yo era estudiante y vivía en Managua. Las noticias de Guatemala y El Salvador llegaban de boca en boca: allá habían caído los dictadores Jorge Ubico y Maximiliano Hernández Martínez. Para muchos de nosotros, aquello demostraba que una movilización popular podía cambiar el rumbo de un país. En las conversaciones de la escuela y en las calles, empezamos a preguntarnos por qué Nicaragua debía seguir bajo el gobierno de Anastasio Somoza García.",
+      "Las movilizaciones comenzaron en Managua y se extendieron a León y otras ciudades. A las protestas estudiantiles se unieron distintos sectores del pueblo, que reclamaban la salida de Somoza. La Guardia Nacional observaba las manifestaciones. La esperanza de que algo cambiara convivía con el temor a la represión.",
+      "La Guardia Nacional actuó con fuerza contra los estudiantes y los demás manifestantes. Hubo golpizas y detenciones; las protestas disminuyeron bajo la presión y algunas personas buscaron refugio en embajadas. Con el tiempo comprendí que la oposición de 1944 no estaba unida alrededor de un proyecto común para reemplazar el sistema. Las marchas exigían la salida de Somoza, pero no necesariamente proponían desmontar los mecanismos de poder que sostenían la dictadura. Algunos opositores esperaban que la Guardia Nacional se pusiera del lado del pueblo, como había ocurrido en Guatemala y El Salvador. Esa esperanza no se cumplió en Nicaragua.",
+      "Décadas después, el asesinato de Pedro Joaquín Chamorro en 1978 provocó nuevas protestas y amplió la oposición al régimen. También se hablaba de la insurrección de Monimbó y de la toma del Palacio Nacional. La lucha se extendía a distintas ciudades y sectores de la población, mientras la represión se intensificaba.",
+      "El 19 de julio de 1979, el FSLN entró en Managua y terminó la dictadura de Anastasio Somoza Debayle. Para quienes habíamos conocido el somocismo durante décadas, el triunfo significaba la posibilidad de transformar el país. Sin embargo, también surgían preguntas sobre cómo se organizaría el nuevo gobierno, quiénes participarían en sus decisiones y qué cambios llegarían a las comunidades.",
+      "En los años siguientes se impulsaron iniciativas en educación y salud, junto con cambios en la participación social y en la organización del Estado. Al mismo tiempo, la guerra y las dificultades económicas afectaban la vida de la población. Las elecciones de 1990 llevaron a un cambio de gobierno. En mi memoria, las marchas de mi juventud y el triunfo revolucionario quedan unidos por una misma pregunta: ¿cómo cambia la vida de la población cuando termina un régimen, y cómo se mantienen esos cambios cuando también cambian las instituciones y los gobiernos?"
+    ]
+  },
+  {
+    n: "Eusebio José Potosme",
+    s: "Pancasán, Matagalpa · Reforma agraria y guerra",
+    p: [
+      "En 1967, la zona de Pancasán, en las montañas de Matagalpa, quedó asociada con la presencia de un grupo guerrillero. Hacia mediados de ese año se concentraron allí unos treinta y cinco hombres: estudiantes, obreros, profesionales y campesinos. La Guardia Nacional cercó a la agrupación el 27 de agosto y se produjeron fuertes combates.",
+      "En el campo se hablaba de movimientos en las montañas y de contactos con campesinos organizados en sindicatos del norte. También circulaban preguntas sobre qué podía ocurrir si la Guardia Nacional descubría la presencia de la guerrilla. El combate de Pancasán dejó muertos entre los combatientes y entre campesinos de la zona. Para el movimiento revolucionario fue una derrota militar y una victoria política y moral; para las comunidades rurales también significó temor, pérdida y violencia.",
+      "Después del triunfo revolucionario de 1979, el campo volvió a ser escenario de cambios profundos. Se impulsó una reforma agraria para modificar la distribución de la tierra e incorporar a la producción a campesinos que carecían de ella. Se promovieron nuevas formas de organización productiva y el Estado asumió un papel importante en el proceso.",
+      "Para algunos campesinos, el acceso a la tierra y la participación en nuevas formas de producción representaron oportunidades. Para otros, las decisiones oficiales podían entrar en conflicto con sus expectativas, prácticas de trabajo o intereses familiares. El campesinado no pensaba ni actuaba como un solo grupo; las respuestas a la reforma variaban según la región y la experiencia de cada comunidad.",
+      "Durante la década de 1980, la guerra afectó la producción, las comunidades rurales y la vida cotidiana. Las políticas agrarias se desarrollaban en medio de los combates, la crisis económica y las dificultades para sostener los servicios. En el campo se sentían los efectos de la escasez y de la incertidumbre, y las relaciones entre las comunidades y el gobierno estaban marcadas tanto por las reformas como por el conflicto armado.",
+      "Cuando llegaron las elecciones de 1990 y el FSLN dejó el gobierno, surgieron nuevas preguntas sobre el futuro de las organizaciones rurales y de las políticas que habían transformado el campo. La historia de Pancasán, la reforma agraria y la guerra quedó entrelazada en la memoria de las comunidades: mostraba cómo los procesos nacionales podían cambiar las condiciones de vida locales, aunque sus habitantes no compartieran una misma interpretación de la revolución."
+    ]
+  },
+  {
+    n: "Josefa del Carmen Mairena",
+    s: "Mujeres campesinas e indígenas · Desde 1934",
+    p: [
+      "En 1934, después del asesinato de Sandino, la Guardia Nacional persiguió a integrantes del Ejército Defensor de la Soberanía Nacional y a personas vinculadas con el movimiento sandinista. La represión se extendió a zonas rurales, entre ellas Wiwilí y las márgenes del río Coco, y afectó también a mujeres, niños y ancianos.",
+      "Las mujeres participaron en la lucha de distintas maneras. Algunas trabajaban como lavanderas y vivanderas; otras formaban parte de redes de información. Entre las mujeres mencionadas en los registros históricos están Blanca Arauz, Petrona Hernández, Filomena Loza y Juana Cruz. Su participación demuestra que la resistencia no estuvo integrada únicamente por hombres armados, sino que también dependió de las labores, los conocimientos y la participación de mujeres campesinas e indígenas.",
+      "En las comunidades, la persecución podía cambiar las rutinas y generar temor por los parientes. Las familias debían mantenerse alerta y buscar formas de protegerse. La información sobre los caminos, las patrullas y los lugares seguros podía ser importante para quienes vivían en zonas afectadas por la represión.",
+      "Después del triunfo de 1979, la participación de las mujeres volvió a ocupar un lugar importante en la vida nacional. Muchas se incorporaron a organizaciones, actividades comunitarias y proyectos sociales. El gobierno revolucionario impulsó cambios que ampliaron su presencia pública, pero la participación no eliminó las desigualdades de género ni resolvió todas las demandas relacionadas con sus derechos.",
+      "Los debates sobre feminismo, antifeminismo y aborto terapéutico mostraron que las transformaciones políticas no resolvían automáticamente las relaciones desiguales. Las mujeres continuaron defendiendo sus derechos y debatiendo su lugar dentro de la sociedad y de las organizaciones políticas.",
+      "En la Costa Caribe, las relaciones entre el gobierno y las comunidades indígenas estuvieron marcadas por demandas de autonomía y por conflictos relacionados con la guerra. El traslado forzoso de comunidades misquitas desde la frontera del río Coco afectó a familias y territorios. Estos hechos revelan las tensiones entre la seguridad del Estado y los derechos de las comunidades.",
+      "La participación de las mujeres campesinas e indígenas en la lucha antisomocista y en los procesos posteriores forma parte de la historia de la revolución. Sus experiencias permiten comprender cómo los grandes cambios políticos se vivieron en la vida familiar y comunitaria, y cómo esos recuerdos se transmitieron entre generaciones."
+    ]
+  },
+  {
+    n: "Rigoberto Ramón Blandón",
+    s: "Del FSLN de 1963 al cambio de gobierno de 1990",
+    p: [
+      "En 1963, una columna guerrillera integrada por unos sesenta hombres y comandada por Santos López se desplazó desde Honduras hacia Nicaragua. Hubo enfrentamientos con la Guardia Nacional en Walaquistán y Raití. Después de enfrentar persecución y grandes dificultades, algunos sobrevivientes regresaron a Honduras.",
+      "En 1964, Carlos Fonseca asumió un papel principal en la dirección de la organización y se incorporó la letra “S” al nombre, que pasó a ser Frente Sandinista de Liberación Nacional. La referencia a Sandino vinculó la lucha de una nueva generación con el legado de resistencia contra la dictadura y la intervención extranjera.",
+      "En los años siguientes, los grupos opositores debatieron las estrategias para enfrentar al somocismo. Algunos promovían alianzas y participación electoral; otros defendían la lucha armada. En 1966, representantes de varias organizaciones discutieron si apoyar la alianza opositora encabezada por Fernando Agüero. Silvio Mayorga defendió la opción armada, y los delegados del FSLN y del FER se retiraron del encuentro. Las diferencias mostraban que quienes se oponían a Somoza no siempre coincidían en la forma de alcanzar el cambio ni en el proyecto que debía suceder a la dictadura.",
+      "En 1978 y 1979, la oposición se amplió y la insurrección se extendió por el país. La unidad de las tendencias sandinistas, la Ofensiva Final y la huelga general precedieron a la caída de Somoza. El triunfo del 19 de julio de 1979 produjo un cambio profundo en las instituciones políticas. El FSLN, formado en la lucha contra la dictadura, pasó a asumir responsabilidades de gobierno junto con otros representantes.",
+      "Durante la década de 1980, el gobierno revolucionario impulsó políticas sociales y reformas, pero gobernó en medio de la guerra con la Contra y de una situación económica difícil. También surgieron debates sobre la participación de la oposición, la organización del poder y la autonomía de las organizaciones populares. La guerra afectó la vida cotidiana y el estado de emergencia restringió algunas libertades civiles.",
+      "En 1990, la Unión Nacional Opositora ganó las elecciones y el FSLN dejó el gobierno. El Frente pasó a la oposición y debió redefinir su relación con sus bases y organizaciones sociales. La revolución no terminó en la memoria de la población con el cambio de gobierno: sus políticas, conflictos y transformaciones siguieron siendo motivo de debate. Para muchos, el período representaba esperanza y participación; para otros, también estaba asociado con la guerra, las restricciones y las dificultades económicas. Las distintas experiencias forman parte de la memoria colectiva del triunfo revolucionario y de su legado."
+    ]
+  }
+];
+
+const fcGrid = document.getElementById("fcGrid");
+
+fcGrid.innerHTML = TESTIMONIOS.map((testimonio, indice) =>
+  `<article class="fc">
+    <div class="fc-inner">
+      <div class="fc-face fc-front">
+        <span class="fc-tag">Persona ${indice + 1}</span>
+        <h3>${testimonio.n}</h3>
+        <p>${testimonio.s}</p>
+        <button type="button" class="fc-open" aria-label="Leer el testimonio de ${testimonio.n}">Leer testimonio</button>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-head">
+          <span class="fc-tag">Persona ${indice + 1}</span>
+          <h3>${testimonio.n}</h3>
+        </div>
+        <div class="fc-text" tabindex="0">${testimonio.p.map(parrafo => `<p>${parrafo}</p>`).join("")}</div>
+        <div class="fc-foot">
+          <button type="button" class="fc-close">Volver</button>
+        </div>
+      </div>
+    </div>
+  </article>`
+).join("");
+
+fcGrid.addEventListener("click", evento => {
+  const tarjeta = evento.target.closest(".fc");
+  if (!tarjeta) return;
+
+  if (evento.target.closest(".fc-front")) {
+    tarjeta.classList.add("flip");
+    tarjeta.querySelector(".fc-text").scrollTop = 0;
+  } else if (evento.target.closest(".fc-close")) {
+    tarjeta.classList.remove("flip");
+  }
+});
 
 /* MÚSICA DE FONDO */
 const bgm = document.getElementById("bgm");
