@@ -18,7 +18,7 @@
   --mist: #2b2b2b;
   --white: #161616;
   --redtxt: #ff6b6b;
-  --hdr: 150px;
+  --hdr: 130px;
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --body: "Source Sans 3", system-ui, sans-serif;
 }
@@ -117,12 +117,12 @@ header {
 }
 
 #menuBtn {
-  font: 600 3rem var(--body);
+  font: 600 2.5rem var(--body);
   background: var(--ink);
   color: var(--bg);
   border: 0;
   border-radius: 999px;
-  padding: 30px 60px;
+  padding: 25px 50px;
   cursor: pointer;
   pointer-events: auto;
 }
@@ -210,15 +210,46 @@ header {
 
 /* PORTADA */
 #inicio {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
   padding-bottom: 9vh;
   color: #fff;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.45) 55%, rgba(0,0,0,.9)),
-    url("Fondos/Fondo001.jpg") center / contain no-repeat,
-    #000;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Fila de fondos: Fondo002 | Fondo001 | Fondo003 */
+#inicio .fondos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#inicio .fondos img {
+  display: block;
+  height: 100%;
+  width: auto;
+  flex: none;
+}
+
+/* Degradado oscuro encima de las fotos para leer el texto */
+#inicio::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.45) 55%, rgba(0,0,0,.9));
+}
+
+#inicio .wrap {
+  position: relative;
+  z-index: 2;
 }
 
 #inicio h1 {
@@ -627,6 +658,11 @@ footer {
 
 <!-- PORTADA (página principal) -->
 <section id="inicio">
+  <div class="fondos" aria-hidden="true">
+    <img src="Fondos/Fondo002.jpg" alt="" onerror="this.style.display='none'">
+    <img src="Fondos/Fondo001.jpg" alt="" onerror="this.style.display='none'">
+    <img src="Fondos/Fondo003.jpg" alt="" onerror="this.style.display='none'">
+  </div>
   <div class="wrap">
     <h1>Insurrección y Revolución Popular Sandinista</h1>
     <p>Un recorrido visual por la historia, las transformaciones sociales y la memoria colectiva de Nicaragua.</p>
