@@ -166,6 +166,22 @@ header {
   color: var(--redtxt);
 }
 
+#menu nav .sub {
+  margin: 0 0 0 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--teal);
+}
+
+#menu nav .sub a {
+  font-size: 1.05rem;
+  font-weight: 600;
+  opacity: .9;
+}
+
+#menu nav .sub a:last-child {
+  border-bottom: 0;
+}
+
 #menu h4 {
   font: 600 .95rem var(--body);
   margin: 20px 0 10px;
@@ -873,9 +889,11 @@ footer {
   <nav>
     <a href="#inicio">Inicio</a>
     <a href="#historia">Línea de tiempo</a>
-    <a href="#proyectos">Proyectos de transformación Social</a>
     <a href="#memoria">Memoria Colectiva</a>
-    <a href="#testimonios">Testimonios</a>
+    <div class="sub" role="group" aria-label="Submenú de Memoria Colectiva">
+      <a href="#proyectos">Proyectos de transformación Social</a>
+      <a href="#testimonios">Testimonios</a>
+    </div>
     <a href="#galeria">Galería multimedia</a>
     <a href="#bibliografia">Bibliografía</a>
   </nav>
@@ -909,7 +927,7 @@ footer {
 <!-- PROYECTOS -->
 <section id="proyectos" hidden>
   <div class="wrap">
-    <a class="back" href="#inicio">← Regresar</a>
+    <a class="back" href="#memoria">← Regresar</a>
     <h2>Proyectos de transformación social</h2>
     <p class="lead">Cuatro ámbitos de cambio social durante el proceso revolucionario. Toca "Leer más" en cada tema para ver el texto completo.</p>
     <div class="grid" id="projects"></div>
@@ -933,16 +951,17 @@ footer {
     <a class="back" href="#inicio">← Regresar</a>
     <h2>Memoria Colectiva</h2>
     <p class="lead">Recuerdos y experiencias compartidas sobre la insurrección y la revolución.</p>
-    <article class="biblio" id="memoriaText">
-      <div class="vacio">Aquí irá el contenido de Memoria Colectiva.</div>
-    </article>
+    <div class="filters">
+      <a class="back" href="#proyectos">Proyectos de transformación Social</a>
+      <a class="back" href="#testimonios">Testimonios</a>
+    </div>
   </div>
 </section>
 
 <!-- TESTIMONIOS -->
 <section id="testimonios" hidden>
   <div class="wrap">
-    <a class="back" href="#inicio">← Regresar</a>
+    <a class="back" href="#memoria">← Regresar</a>
     <h2>Testimonios</h2>
     <p class="lead">Toca una tarjeta para leer el testimonio completo. Toca "Volver" para regresar al frente.</p>
     <div class="fc-grid" id="fcGrid"></div>
