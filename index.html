@@ -108,16 +108,11 @@ header {
   inset: 0 0 auto 0;
   z-index: 20;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 14px 6vw;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(10px);
-}
-
-.logo {
-  font: 800 1.15rem var(--display);
-  text-decoration: none;
 }
 
 #menuBtn {
@@ -610,7 +605,6 @@ footer {
 <body>
 
 <header>
-  <a class="logo" href="#inicio">Raíces en Movimiento</a>
   <button id="menuBtn" aria-expanded="false" aria-controls="menu">Navega por aquí</button>
 </header>
 
