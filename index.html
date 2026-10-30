@@ -399,6 +399,12 @@ header {
   max-width: 62ch;
 }
 
+.tl .tl-embed {
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 /* PROYECTOS */
 #proyectos {
   background: #8f0f16;
@@ -835,7 +841,8 @@ const tl = document.getElementById("tl");
 const mini = document.getElementById("miniTl");
 
 const TIMELINE = [
-  {y:"21 de febrero de 1934", k:"1934", t:"Asesinato de Augusto C. Sandino", d:"La Guardia Nacional persigue luego a integrantes de su movimiento y a comunidades rurales."},
+  {y:"21 de febrero de 1934", k:"1934", t:"Asesinato de Augusto C. Sandino", d:"La Guardia Nacional persigue luego a integrantes de su movimiento y a comunidades rurales.",
+   embed:`<div class="tl-video" style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1241167263?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Sandino, la noche que fue traicionado"></iframe></div>`},
   {y:"1936–1937", k:"1936", t:"Somoza García consolida su poder", d:"Anastasio Somoza García asume la presidencia en 1937 y establece las bases de la dictadura."},
   {y:"1944", k:"1944", t:"Movilización contra Somoza", d:"Estudiantes y sectores populares se movilizan para exigir la salida de Somoza; la Guardia Nacional reprime las protestas."},
   {y:"1961", k:"1961", t:"Nace el FSLN", d:"Se forma el Frente de Liberación Nacional, que posteriormente adopta el nombre de Frente Sandinista de Liberación Nacional (FSLN)."},
@@ -860,7 +867,7 @@ TIMELINE.forEach((evento, indice) => {
         <span class="yr">${evento.y}</span>
         <span>${evento.t}</span>
       </summary>
-      <div class="txt">${evento.d}</div>
+      <div class="txt">${evento.d}${evento.embed ? `<div class="tl-embed">${evento.embed}</div>` : ""}</div>
     </details>`
   );
 
@@ -1067,6 +1074,7 @@ refrescarBoton();
 /* Mostrar la página que corresponda al abrir el sitio */
 route();
 </script>
+<script src="https://player.vimeo.com/api/player.js"></script>
 
 </body>
 </html>
