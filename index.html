@@ -874,8 +874,9 @@ footer {
     <a href="#inicio">Inicio</a>
     <a href="#historia">Línea de tiempo</a>
     <a href="#proyectos">Proyectos de transformación Social</a>
-    <a href="#galeria">Galería multimedia</a>
+    <a href="#memoria">Memoria Colectiva</a>
     <a href="#testimonios">Testimonios</a>
+    <a href="#galeria">Galería multimedia</a>
     <a href="#bibliografia">Bibliografía</a>
   </nav>
   <h4>Linea de tiempo: ve directo a una fecha</h4>
@@ -923,6 +924,18 @@ footer {
     
     <div class="filters" id="gFilters"></div>
     <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- MEMORIA COLECTIVA -->
+<section id="memoria" hidden>
+  <div class="wrap">
+    <a class="back" href="#inicio">← Regresar</a>
+    <h2>Memoria Colectiva</h2>
+    <p class="lead">Recuerdos y experiencias compartidas sobre la insurrección y la revolución.</p>
+    <article class="biblio" id="memoriaText">
+      <div class="vacio">Aquí irá el contenido de Memoria Colectiva.</div>
+    </article>
   </div>
 </section>
 
@@ -983,7 +996,7 @@ menu.addEventListener("click", evento => {
 });
 
 /* NAVEGACIÓN ENTRE PÁGINAS (cada sección es una pantalla aparte) */
-const VISTAS = ["inicio", "historia", "proyectos", "galeria", "testimonios", "bibliografia"];
+const VISTAS = ["inicio", "historia", "proyectos", "memoria", "testimonios", "galeria", "bibliografia"];
 let hitoPendiente = null;
 
 function route() {
