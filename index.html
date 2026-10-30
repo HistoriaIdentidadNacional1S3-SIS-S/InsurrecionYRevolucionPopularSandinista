@@ -18,6 +18,7 @@
   --mist: #2b2b2b;
   --white: #161616;
   --redtxt: #ff6b6b;
+  --hdr: 150px;
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --body: "Source Sans 3", system-ui, sans-serif;
 }
@@ -33,7 +34,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 72px;
+  scroll-padding-top: var(--hdr);
 }
 
 body {
@@ -58,7 +59,7 @@ a {
 }
 
 section {
-  padding: 88px 6vw;
+  padding: calc(var(--hdr) + 20px) 6vw 88px;
 }
 
 .wrap {
@@ -111,26 +112,27 @@ header {
   justify-content: flex-end;
   align-items: center;
   padding: 14px 6vw;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(10px);
+  background: transparent;
+  pointer-events: none;
 }
 
 #menuBtn {
-  font: 600 1rem var(--body);
+  font: 600 3rem var(--body);
   background: var(--ink);
   color: var(--bg);
   border: 0;
   border-radius: 999px;
-  padding: 10px 20px;
+  padding: 30px 60px;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 #menu {
   position: fixed;
-  top: 64px;
+  top: var(--hdr);
   right: 4vw;
   width: min(380px, 92vw);
-  max-height: calc(100vh - 84px);
+  max-height: calc(100vh - var(--hdr) - 20px);
   overflow: auto;
   background: var(--white);
   border: 1px solid var(--mist);
@@ -596,6 +598,8 @@ footer {
 }
 
 @media (max-width: 600px) {
+  :root { --hdr: 96px; }
+  #menuBtn { font-size: 1.6rem; padding: 16px 32px; }
   .tl { padding-left: 24px; }
   .tl details::before { left: -37px; }
   .tl summary { flex-direction: column; gap: 2px; }
