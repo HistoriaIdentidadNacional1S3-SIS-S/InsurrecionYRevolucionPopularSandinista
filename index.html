@@ -27,6 +27,10 @@
   margin: 0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
@@ -71,6 +75,31 @@ h2 {
   max-width: 60ch;
   opacity: .8;
   margin-bottom: 40px;
+}
+
+/* BOTÓN REGRESAR */
+.back {
+  display: inline-block;
+  margin: 12px 0 28px;
+  padding: 10px 20px;
+  font: 700 1rem var(--display);
+  text-decoration: none;
+  color: var(--ink);
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+
+.back:hover {
+  color: var(--redtxt);
+}
+
+#proyectos .back {
+  color: #fff;
+}
+
+#proyectos .back:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, .15);
 }
 
 /* BARRA Y MENÚ */
@@ -582,7 +611,7 @@ footer {
 
 <header>
   <a class="logo" href="#inicio">Raíces en Movimiento</a>
-  <button id="menuBtn" aria-expanded="false" aria-controls="menu">Menú</button>
+  <button id="menuBtn" aria-expanded="false" aria-controls="menu">Navega por aquí</button>
 </header>
 
 <div id="menu" aria-label="Menú principal">
@@ -597,7 +626,7 @@ footer {
   <ul class="mini" id="miniTl"></ul>
 </div>
 
-<!-- PORTADA -->
+<!-- PORTADA (página principal) -->
 <section id="inicio">
   <div class="wrap">
     <h1>Insurrección y Revolución Popular Sandinista</h1>
@@ -606,8 +635,9 @@ footer {
 </section>
 
 <!-- LÍNEA DE TIEMPO -->
-<section id="historia">
+<section id="historia" hidden>
   <div class="wrap">
+    <a class="back" href="#inicio">← Regresar</a>
     <h2>Línea de tiempo</h2>
     <p class="lead">Toca una fecha para leer qué ocurrió.</p>
     <div class="tl" id="tl"></div>
@@ -615,8 +645,9 @@ footer {
 </section>
 
 <!-- PROYECTOS -->
-<section id="proyectos">
+<section id="proyectos" hidden>
   <div class="wrap">
+    <a class="back" href="#inicio">← Regresar</a>
     <h2>Proyectos de transformación social</h2>
     <p class="lead">Iniciativas activas y cerradas. Filtra por el área que te interese.</p>
     <div class="filters" id="filters"></div>
@@ -625,8 +656,9 @@ footer {
 </section>
 
 <!-- GALERÍA -->
-<section id="galeria">
+<section id="galeria" hidden>
   <div class="wrap">
+    <a class="back" href="#inicio">← Regresar</a>
     <h2>Galería multimedia</h2>
     <p class="lead">Fotos y videos del trabajo en territorio.</p>
     <div class="filters" id="gFilters"></div>
@@ -635,8 +667,9 @@ footer {
 </section>
 
 <!-- BIBLIOGRAFÍA -->
-<section id="bibliografia">
+<section id="bibliografia" hidden>
   <div class="wrap">
+    <a class="back" href="#inicio">← Regresar</a>
     <h2>Bibliografía</h2>
     <p class="lead">Fuentes y textos de referencia de este sitio.</p>
     <article class="biblio" id="biblioText">
@@ -665,13 +698,41 @@ const mb = document.getElementById("menuBtn");
 const setMenu = abierto => {
   menu.classList.toggle("open", abierto);
   mb.setAttribute("aria-expanded", abierto);
-  mb.textContent = abierto ? "Cerrar" : "Menú";
+  mb.textContent = abierto ? "Cerrar" : "Navega por aquí";
 };
 
 mb.onclick = () => setMenu(!menu.classList.contains("open"));
 menu.addEventListener("click", evento => {
   if (evento.target.closest("a")) setMenu(false);
 });
+
+/* NAVEGACIÓN ENTRE PÁGINAS (cada sección es una pantalla aparte) */
+const VISTAS = ["inicio", "historia", "proyectos", "galeria", "bibliografia"];
+let hitoPendiente = null;
+
+function route() {
+  let id = location.hash.slice(1);
+  if (!VISTAS.includes(id)) id = "inicio";
+
+  VISTAS.forEach(v => {
+    document.getElementById(v).hidden = (v !== id);
+  });
+
+  setMenu(false);
+  closeLightbox();
+  window.scrollTo({ top: 0, behavior: "instant" });
+
+  if (id === "historia" && hitoPendiente !== null) {
+    const detalle = document.getElementById("h" + hitoPendiente);
+    hitoPendiente = null;
+    if (detalle) {
+      detalle.open = true;
+      detalle.scrollIntoView({ block: "center" });
+    }
+  }
+}
+
+window.addEventListener("hashchange", route);
 
 /* LÍNEA DE TIEMPO */
 const tl = document.getElementById("tl");
@@ -709,18 +770,20 @@ TIMELINE.forEach((evento, indice) => {
 
   mini.insertAdjacentHTML(
     "beforeend",
-    `<li><a href="#h${indice}" data-i="${indice}">
+    `<li><a href="#historia" data-i="${indice}">
       <b>${evento.k}</b> · ${evento.t}
     </a></li>`
   );
 });
 
+/* Hitos del menú: abren la página de la línea de tiempo y despliegan esa fecha */
 mini.addEventListener("click", evento => {
   const enlace = evento.target.closest("a");
-  if (enlace) {
-    setTimeout(() => {
-      document.getElementById("h" + enlace.dataset.i).open = true;
-    }, 50);
+  if (!enlace) return;
+  hitoPendiente = Number(enlace.dataset.i);
+  if (location.hash === "#historia") {
+    evento.preventDefault();
+    route();
   }
 });
 
@@ -870,6 +933,9 @@ document.addEventListener("keydown", evento => {
 });
 
 drawGallery();
+
+/* Mostrar la página que corresponda al abrir el sitio */
+route();
 </script>
 
 </body>
