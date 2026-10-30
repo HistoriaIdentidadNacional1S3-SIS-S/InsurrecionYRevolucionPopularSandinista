@@ -125,6 +125,7 @@ header {
   padding: 25px 50px;
   cursor: pointer;
   pointer-events: auto;
+  opacity: .5;
 }
 
 #menu {
@@ -208,6 +209,38 @@ header {
   color: var(--redtxt);
 }
 
+/* MÚSICA DE FONDO */
+#audioCtl {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 21;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+}
+
+#audioBtn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#vol {
+  width: 90px;
+  accent-color: var(--teal);
+  cursor: pointer;
+}
+
 /* PORTADA */
 #inicio {
   position: relative;
@@ -220,21 +253,44 @@ header {
   overflow: hidden;
 }
 
-/* Fila de fondos: Fondo002 | Fondo001 | Fondo003 */
+/* Fila de fondos: Fondo002 | Fondo001 | Fondo003
+   Fondo001 mantiene su tamaño (altura completa).
+   Fondo002 y Fondo003 se reparten el espacio restante a cada lado
+   y se ven completos, sin recortes. */
 #inicio .fondos {
   position: absolute;
   inset: 0;
   z-index: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 #inicio .fondos img {
   display: block;
   height: 100%;
+}
+
+#inicio .fondos img:nth-child(2) {
   width: auto;
   flex: none;
+}
+
+#inicio .fondos img:nth-child(1),
+#inicio .fondos img:nth-child(3) {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 0;
+  object-fit: contain;
+}
+
+/* Cada lateral se pega a la imagen central, sin huecos */
+#inicio .fondos img:nth-child(1) {
+  object-position: right center;
+}
+
+#inicio .fondos img:nth-child(3) {
+  object-position: left center;
 }
 
 /* Degradado oscuro encima de las fotos para leer el texto */
@@ -722,6 +778,14 @@ footer {
   <div id="lbCap"></div>
 </div>
 
+<!-- MÚSICA DE FONDO -->
+<audio id="bgm" src="Fondos/AudioBackgroun001.mp3" loop preload="auto"></audio>
+
+<div id="audioCtl">
+  <button id="audioBtn" aria-label="Pausar música">⏸</button>
+  <input id="vol" type="range" min="0" max="1" step="0.05" value="0.5" aria-label="Volumen">
+</div>
+
 <script>
 /* MENÚ */
 const menu = document.getElementById("menu");
@@ -965,6 +1029,40 @@ document.addEventListener("keydown", evento => {
 });
 
 drawGallery();
+
+/* MÚSICA DE FONDO */
+const bgm = document.getElementById("bgm");
+const audioBtn = document.getElementById("audioBtn");
+const vol = document.getElementById("vol");
+bgm.volume = vol.value;
+
+const refrescarBoton = () => {
+  audioBtn.textContent = bgm.paused ? "▶" : "⏸";
+  audioBtn.setAttribute("aria-label", bgm.paused ? "Reanudar música" : "Pausar música");
+};
+
+bgm.addEventListener("play", refrescarBoton);
+bgm.addEventListener("pause", refrescarBoton);
+
+/* Intenta reproducir al cargar; si el navegador lo bloquea, arranca con el primer clic */
+bgm.play().catch(() => {});
+
+const arrancarConClic = evento => {
+  if (evento.target.closest("#audioCtl")) return;
+  bgm.play().then(() => {
+    document.removeEventListener("pointerdown", arrancarConClic);
+  }).catch(() => {});
+};
+document.addEventListener("pointerdown", arrancarConClic);
+
+audioBtn.onclick = () => {
+  if (bgm.paused) bgm.play().catch(() => {});
+  else bgm.pause();
+};
+
+vol.oninput = () => { bgm.volume = vol.value; };
+
+refrescarBoton();
 
 /* Mostrar la página que corresponda al abrir el sitio */
 route();
