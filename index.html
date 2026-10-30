@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 
@@ -461,6 +462,7 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 22px;
+  align-items: start;
 }
 
 .card {
@@ -472,12 +474,52 @@ header {
 }
 
 .card .top {
-  height: 140px;
+  min-height: 140px;
   display: flex;
   align-items: flex-end;
   padding: 14px 18px;
   color: #fff;
-  font: 800 2.3rem var(--display);
+  font: 800 1.6rem/1.15 var(--display);
+}
+
+.card .more {
+  margin-top: 4px;
+}
+
+.card .more summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-block;
+  font: 700 .95rem var(--display);
+  color: var(--redtxt);
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin-bottom: 14px;
+}
+
+.card .more summary::-webkit-details-marker {
+  display: none;
+}
+
+.card .more[open] summary {
+  font-size: 0;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.card .more[open] summary::after {
+  content: "Mostrar menos";
+  font: 700 .95rem var(--display);
+  display: inline-block;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 16px;
+}
+
+.card .more[open] p:last-of-type {
+  margin-bottom: 14px;
 }
 
 .card .body {
@@ -831,7 +873,7 @@ footer {
   <nav>
     <a href="#inicio">Inicio</a>
     <a href="#historia">Línea de tiempo</a>
-    <a href="#proyectos">Proyectos de transformación</a>
+    <a href="#proyectos">Proyectos de transformación Social</a>
     <a href="#galeria">Galería multimedia</a>
     <a href="#testimonios">Testimonios</a>
     <a href="#bibliografia">Bibliografía</a>
@@ -868,8 +910,7 @@ footer {
   <div class="wrap">
     <a class="back" href="#inicio">← Regresar</a>
     <h2>Proyectos de transformación social</h2>
-    <p class="lead">Iniciativas activas y cerradas. Filtra por el área que te interese.</p>
-    <div class="filters" id="filters"></div>
+    <p class="lead">Cuatro ámbitos de cambio social durante el proceso revolucionario. Toca "Leer más" en cada tema para ver el texto completo.</p>
     <div class="grid" id="projects"></div>
   </div>
 </section>
@@ -879,7 +920,7 @@ footer {
   <div class="wrap">
     <a class="back" href="#inicio">← Regresar</a>
     <h2>Galería multimedia</h2>
-    <p class="lead">Fotos y videos del trabajo en territorio.</p>
+    
     <div class="filters" id="gFilters"></div>
     <div class="gal" id="gal"></div>
   </div>
@@ -1026,46 +1067,68 @@ mini.addEventListener("click", evento => {
 
 /* PROYECTOS */
 const PROJECTS = [
-  {n:"Huertos Vivos", c:"Alimentación", g:["#8f0f16","#d71920"], d:"Huertos familiares y mercado local para asegurar comida sana todo el año.", p:75, s:"150 familias"},
-  {n:"Escuela de Barrio", c:"Educación", g:["#111","#5a0a0f"], d:"Apoyo escolar, lectura y tecnología para niñas, niños y adolescentes.", p:60, s:"320 estudiantes"},
-  {n:"Jóvenes Líderes", c:"Juventud", g:["#d71920","#ff5a4d"], d:"Formación en liderazgo y emprendimiento con mentoría de referentes locales.", p:90, s:"120 jóvenes"},
-  {n:"Agua y Río", c:"Ambiente", g:["#000","#8f0f16"], d:"Recuperación de cauces, reforestación y vigilancia ciudadana del agua.", p:45, s:"8 km recuperados"},
-  {n:"Mujeres Tejedoras", c:"Economía", g:["#2a2a2a","#d71920"], d:"Cooperativa de mujeres con capital semilla, capacitación y venta conjunta.", p:80, s:"64 socias"}
+  {
+    n: "Transformaciones en educación y salud",
+    c: "Educación y salud",
+    g: ["#8f0f16", "#d71920"],
+    t: [
+      "La educación ocupó un lugar importante dentro del proyecto revolucionario. El gobierno impulsó acciones para ampliar el acceso a la educación y reducir el analfabetismo. Estas iniciativas promovieron la participación de jóvenes y comunidades, y vincularon el aprendizaje con la incorporación de sectores populares a la vida nacional. La educación se convirtió en uno de los ámbitos asociados con la expectativa de cambio social después de la dictadura.",
+      "Los cambios educativos también tuvieron un significado cultural. La alfabetización y la formación permitieron que más personas participaran en espacios comunitarios y sociales. En la memoria colectiva, estas experiencias pueden ser recordadas como campañas nacionales de participación, aprendizaje y solidaridad. Su análisis debe considerar las distintas experiencias de quienes participaron y las diferencias entre las regiones y comunidades.",
+      "La salud fue otro de los campos en los que el gobierno buscó ampliar la atención a la población. Las políticas sanitarias procuraron responder a necesidades sociales que habían afectado con mayor fuerza a sectores con acceso limitado a los servicios. La guerra, la crisis económica y las restricciones de recursos, sin embargo, influyeron en la capacidad del Estado para sostener y extender estos programas.",
+      "La valoración de las políticas de educación y salud forma parte del debate sobre el legado revolucionario. Junto con los avances y las iniciativas implementadas, es necesario examinar las dificultades de ejecución, su cobertura y su efecto en la vida de las personas. Los testimonios de quienes participaron en campañas, recibieron atención o trabajaron en estos servicios pueden contribuir a reconstruir cómo se experimentaron esos cambios."
+    ]
+  },
+  {
+    n: "Reforma agraria y transformaciones en el campo",
+    c: "Campo y economía",
+    g: ["#111", "#5a0a0f"],
+    t: [
+      "La reforma agraria fue una de las principales transformaciones económicas y sociales asociadas con el gobierno revolucionario. El objetivo consistía en modificar la distribución de la tierra e incorporar a la producción a campesinos que carecían de ella. El proceso incluyó la intervención de propiedades y la creación de formas de producción en las que el Estado asumió un papel importante.",
+      "La transformación agraria alteró las relaciones entre el Estado, los propietarios y las comunidades rurales. Para algunos campesinos, la posibilidad de acceder a tierra y participar en nuevas formas de organización productiva representó una oportunidad de mejorar sus condiciones de vida. Para otros, las políticas estatales podían entrar en conflicto con sus expectativas, sus prácticas de trabajo, sus intereses familiares o sus formas de organización.",
+      "El campesinado no constituyó un grupo homogéneo. Las respuestas a la reforma agraria y a la organización estatal variaron de acuerdo con la región, el acceso a la tierra y la experiencia de cada comunidad. La política agraria también estuvo condicionada por la guerra, la reducción de las inversiones y las dificultades económicas. Por eso, el estudio de la reforma debe contemplar tanto sus propósitos como los efectos que tuvo en distintos sectores rurales.",
+      "La relación entre el campesinado y el conflicto armado fue significativa. La oposición al gobierno revolucionario incorporó a personas que habían expresado descontento con algunas de sus políticas, y las zonas rurales se convirtieron en escenarios centrales de la guerra. Analizar las experiencias campesinas permite comprender de qué manera las políticas agrarias, los conflictos locales y las decisiones del Estado influyeron en las lealtades y las formas de participación política."
+    ]
+  },
+  {
+    n: "Mujeres, participación política y derechos",
+    c: "Mujeres y derechos",
+    g: ["#d71920", "#5a0a0f"],
+    t: [
+      "Las mujeres participaron en distintos momentos de la lucha contra la dictadura y en las transformaciones políticas posteriores al triunfo. Su presencia se manifestó en organizaciones, actividades comunitarias, movilizaciones y espacios de trabajo. La revolución aumentó la participación de mujeres en la vida pública, aunque ello no eliminó las desigualdades de género ni resolvió todas las demandas relacionadas con sus derechos.",
+      "La discusión sobre la participación femenina comprende tanto su incorporación a organizaciones y proyectos políticos como los límites que enfrentaron dentro de esas estructuras. El análisis del feminismo, el antifeminismo y el debate sobre el aborto terapéutico muestra que las transformaciones sociales estuvieron acompañadas por disputas sobre los derechos de las mujeres, las relaciones de género y la influencia de actores políticos y religiosos.",
+      "La memoria de la revolución también puede examinarse desde las experiencias femeninas. Los relatos de mujeres permiten conocer cómo vivieron la insurrección, la organización comunitaria, las campañas sociales, la guerra y los cambios familiares y laborales. Incorporar esas experiencias ayuda a ampliar la narración histórica y a reconocer que la transformación política tuvo dimensiones cotidianas y personales."
+    ]
+  },
+  {
+    n: "Autonomía y comunidades de la Costa Caribe",
+    c: "Costa Caribe",
+    g: ["#2a2a2a", "#d71920"],
+    t: [
+      "La Costa Caribe ocupó un lugar importante en el proceso revolucionario debido a la diversidad cultural y étnica de sus comunidades. El gobierno revolucionario impulsó cambios relacionados con la autonomía regional y la participación política de los pueblos indígenas y comunidades de la región. El reconocimiento de autonomía constituyó una transformación institucional significativa y planteó nuevos vínculos entre las autoridades nacionales y las formas de organización regional.",
+      "La relación entre el gobierno y las comunidades de la Costa Caribe también estuvo marcada por tensiones. Durante la guerra, el gobierno realizó traslados forzosos de comunidades misquitas de la zona fronteriza del río Coco hacia nuevos asentamientos. La medida fue justificada por el gobierno en términos de seguridad, mientras que grupos indígenas y opositores denunciaron sus consecuencias para la población. Estos acontecimientos evidencian la complejidad de las relaciones entre el Estado revolucionario, la seguridad nacional y los derechos de las comunidades.",
+      "El estudio de la autonomía requiere atender a las perspectivas de las propias comunidades, sus demandas y las formas en que interpretaron las políticas gubernamentales. También permite analizar cómo las transformaciones de la revolución se desarrollaron de manera diferente en las regiones del país y cómo las identidades culturales incidieron en la experiencia política."
+    ]
+  }
 ];
 
-const cats = ["Todos", ...new Set(PROJECTS.map(proyecto => proyecto.c))];
-const fEl = document.getElementById("filters");
 const pEl = document.getElementById("projects");
 
-function drawProjects(categoria = "Todos") {
-  fEl.innerHTML = cats.map(categoriaItem =>
-    `<button class="${categoriaItem === categoria ? "on" : ""}" data-c="${categoriaItem}">
-      ${categoriaItem}
-    </button>`
+function drawProjects() {
+  pEl.innerHTML = PROJECTS.map(proyecto => `
+    <article class="card">
+      <div class="top" style="background:linear-gradient(135deg,${proyecto.g[0]},${proyecto.g[1]})">${proyecto.n}</div>
+      <div class="body">
+        <span class="tag">${proyecto.c}</span>
+        <h3>${proyecto.n}</h3>
+        <p>${proyecto.t[0]}</p>
+        <details class="more">
+          <summary>Leer más</summary>
+          ${proyecto.t.slice(1).map(parrafo => `<p>${parrafo}</p>`).join("")}
+        </details>
+      </div>
+    </article>`
   ).join("");
-
-  pEl.innerHTML = PROJECTS
-    .filter(proyecto => categoria === "Todos" || proyecto.c === categoria)
-    .map(proyecto => `
-      <article class="card">
-        <div class="top" style="background:linear-gradient(135deg,${proyecto.g[0]},${proyecto.g[1]})">${proyecto.n}</div>
-        <div class="body">
-          <span class="tag">${proyecto.c}</span>
-          <h3>${proyecto.n}</h3>
-          <p>${proyecto.d}</p>
-          <div class="bar" role="progressbar" aria-valuenow="${proyecto.p}" aria-valuemin="0" aria-valuemax="100">
-            <i style="width:${proyecto.p}%"></i>
-          </div>
-          <small>${proyecto.s} · ${proyecto.p}% de la meta</small>
-        </div>
-      </article>`
-    ).join("");
 }
-
-fEl.onclick = evento => {
-  const boton = evento.target.closest("button");
-  if (boton) drawProjects(boton.dataset.c);
-};
 
 drawProjects();
 
